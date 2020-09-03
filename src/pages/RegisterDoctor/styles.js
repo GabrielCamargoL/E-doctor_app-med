@@ -47,3 +47,28 @@ export const Advance = styled.Text`
   flex:1;
   text-decoration-line: underline;
 `;
+
+
+export const Circle = styled.TouchableOpacity`
+    height: 20;
+    width: 20;
+    border-radius: 10;
+    border-width: 1;
+    border-color: #ACACAC;
+    align-items: center;
+    justify-content: center;
+    margin-right:7
+`;
+
+export const CheckedCircle = styled.TouchableOpacity`
+    width: 14;
+    height: 14;
+    border-radius: 10;
+    background-color: #4B7299;
+`;
+
+export const ButtonContainer = styled.View`
+    flex-direction: row;
+    justify-content: space-between;
+    margin-top:10
+`;
