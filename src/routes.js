@@ -1,6 +1,9 @@
 import React from 'react';
+import { View, Text, Image } from 'react-native';
+import { TouchableOpacity } from 'react-native-gesture-handler';
 
 import { useNavigation, DrawerActions } from '@react-navigation/native';
+import { createDrawerNavigator } from '@react-navigation/drawer';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { createStackNavigator } from '@react-navigation/stack';
 
@@ -8,9 +11,11 @@ import Home from './pages/Home';
 import Login from './pages/Login';
 import RegisterDoctor from './pages/RegisterDoctor';
 import RegisterStepTwo from './pages/RegisterDoctor/RegisterStepTwo';
+import DetailsDoctor from './pages/DetailsDoctor';
 
 const Stack = createStackNavigator();
 const Tab = createBottomTabNavigator();
+
 
 function BottomTab() {
   return (
@@ -24,13 +29,34 @@ function BottomTab() {
   );
 }
 
+
 export default function Routes() {
   return (
     <Stack.Navigator>
-      <Stack.Screen options={{ headerShown: false }} name="Login" component={Login} />
-      <Stack.Screen options={{ title: 'Cadastro' }} name="RegisterDoctor" component={RegisterDoctor} />
-      <Stack.Screen options={{ title: 'Cadastro' }} name="RegisterStepTwo" component={RegisterStepTwo} />
-      <Stack.Screen name="Home" component={BottomTab} />
+      <Stack.Screen 
+        options={{ headerShown: false }} 
+        name="Login" 
+        component={Login} 
+      />
+      <Stack.Screen 
+        options={{ title: 'Cadastro de Profissional' }} 
+        name="RegisterDoctor" 
+        component={RegisterDoctor} 
+      />
+      <Stack.Screen 
+        options={{ title: 'Cadastro de Profissional' }} 
+        name="RegisterStepTwo" 
+        component={RegisterStepTwo} 
+      />
+      <Stack.Screen 
+        options={{ headerShown: false }} 
+        name="DetailsDoctor" 
+        component={DetailsDoctor} 
+      />
+      <Stack.Screen 
+        name="Home" 
+        component={BottomTab} 
+      />
     </Stack.Navigator>
   );
 };

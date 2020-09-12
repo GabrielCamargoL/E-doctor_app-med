@@ -27,7 +27,7 @@ export const LabelContainer = styled.View.attrs({
   top: 10;
   left: 25;
   z-Index: 50;
-  width:20%;
+  width:23%;
 `;
 
 export const InputLabel = styled.TextInput`
@@ -37,6 +37,26 @@ export const InputLabel = styled.TextInput`
   border-radius: 10;
   padding-left: 10;
   width: 100%;
+  margin-bottom:20;
+`;
+
+export const HalfInputLabel = styled.TextInput`
+  border-width: 1;
+  border-color: #000;
+  height: 50;
+  border-radius: 10;
+  padding-left: 10;
+  width: 100%;
+  margin-bottom:20;
+`;
+
+export const SmallInputLabel = styled.TextInput`
+  border-width: 1;
+  border-color: #000;
+  height: 50;
+  border-radius: 10;
+  padding-left: 10;
+  width: 50%;
   margin-bottom:20;
 `;
 
@@ -70,5 +90,5 @@ export const CheckedCircle = styled.TouchableOpacity`
 export const ButtonContainer = styled.View`
     flex-direction: row;
     justify-content: space-between;
-    margin-top:10
+    margin-right:15;
 `;

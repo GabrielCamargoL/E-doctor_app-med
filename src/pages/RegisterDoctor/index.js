@@ -31,7 +31,6 @@ export default function RegisterDoctor({ navigation }) {
 
   return (
     <>
-      {console.log(name)}
       <Container>
         <SubTitle> Dados Pessoal </SubTitle>
       
@@ -78,7 +77,7 @@ export default function RegisterDoctor({ navigation }) {
 
         <InputContainer>
           <LabelContainer>
-            <Text style={{ fontSize: 16 }}>CPF</Text>
+            <Text style={{ fontSize: 16 }}>Telefone</Text>
           </LabelContainer>
           <InputLabel
             placeholder="99999-9999"
