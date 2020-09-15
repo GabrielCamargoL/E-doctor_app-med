@@ -20,7 +20,7 @@ import { TouchableOpacity } from 'react-native-gesture-handler';
 import api from '../../services/api';
 
 
-export default function RegisterDoctor({ navigation }) {
+export default function RegisterStep3({ navigation }) {
 
   const [specialty, setSpecialty] = useState('');
   const [crm, setCrm] = useState('');
@@ -37,7 +37,7 @@ export default function RegisterDoctor({ navigation }) {
   const options = [{ key: false, value: 'Não' }, { key: true, value: 'Sim' }]
 
   async function handleAdvance() {
-    return navigation.navigate('RegisterStepTwo');
+    return navigation.navigate('RegisterStep4');
   }
 
   return (
@@ -237,7 +237,7 @@ export default function RegisterDoctor({ navigation }) {
           </>
         }
 
-        <TouchableOpacity onPress={() => {handleAdvance}}>
+        <TouchableOpacity onPress={handleAdvance}>
           <View style={{ alignItems: 'center' }}>
             <Advance>Avançar</Advance>
           </View>

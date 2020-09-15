@@ -26,7 +26,7 @@ export default function RegisterDoctor({ navigation }) {
 
 
   async function handleAdvance() {
-    return navigation.navigate('RegisterStepTwo');
+    return navigation.navigate('RegisterStep2');
   }
 
   return (

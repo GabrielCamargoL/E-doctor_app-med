@@ -77,7 +77,7 @@ export const Circle = styled.TouchableOpacity`
     border-color: #ACACAC;
     align-items: center;
     justify-content: center;
-    margin-right:7
+    margin-right:7;
 `;
 
 export const CheckedCircle = styled.TouchableOpacity`
@@ -91,4 +91,22 @@ export const ButtonContainer = styled.View`
     flex-direction: row;
     justify-content: space-between;
     margin-right:15;
+`;
+
+export const Avatar = styled.Image`
+    align-self: center;
+    margin-top:15%;
+`;
+
+export const ButtonSend = styled.Button`
+    width:35%;
+    background-color:#DDD;
+`;
+
+export const ButtonSendView = styled.View`
+  align-self: center;
+`;
+
+export const AccessCamera = styled.View`
+  background-color:#7915C1;
 `;

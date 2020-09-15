@@ -4,7 +4,7 @@ import { Tabs, TabHeading, Tab } from 'native-base';
 import { Container, Logo, Title, TabMenu } from './styles';
 import { Calendar, CalendarList, Agenda } from 'react-native-calendars';
 import InputSearch from '../../components/InputSearch';
-import DoctorCard from '../../components/DoctorCard';git 
+import DoctorCard from '../../components/DoctorCard';
 import logo3 from '../../assets/home1.png';
 
 

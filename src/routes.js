@@ -9,8 +9,12 @@ import { createStackNavigator } from '@react-navigation/stack';
 
 import Home from './pages/Home';
 import Login from './pages/Login';
+
 import RegisterDoctor from './pages/RegisterDoctor';
-import RegisterStepTwo from './pages/RegisterDoctor/RegisterStepTwo';
+import RegisterStep2 from './pages/RegisterDoctor/RegisterStep2';
+import RegisterStep3 from './pages/RegisterDoctor/RegisterStep3';
+import RegisterStep4 from './pages/RegisterDoctor/RegisterStep4';
+
 import DetailsDoctor from './pages/DetailsDoctor';
 
 const Stack = createStackNavigator();
@@ -22,9 +26,7 @@ function BottomTab() {
     <Tab.Navigator>
       <Tab.Screen name="Home" component={Home} />
       <Tab.Screen name="Buscar" component={Home} />
-      <Tab.Screen name="Consultas" component={Home} />
       <Tab.Screen name="Opções" component={Home} />
-      <Tab.Screen name="Medicamentos" component={Home} />
     </Tab.Navigator>
   );
 }
@@ -39,14 +41,24 @@ export default function Routes() {
         component={Login} 
       />
       <Stack.Screen 
-        options={{ title: 'Cadastro de Profissional' }} 
+        options={{ title: 'Cadastro' }} 
         name="RegisterDoctor" 
         component={RegisterDoctor} 
       />
       <Stack.Screen 
-        options={{ title: 'Cadastro de Profissional' }} 
-        name="RegisterStepTwo" 
-        component={RegisterStepTwo} 
+        options={{ title: 'Cadastro' }} 
+        name="RegisterStep2" 
+        component={RegisterStep2} 
+      />
+      <Stack.Screen 
+        options={{ title: 'Cadastro' }} 
+        name="RegisterStep3" 
+        component={RegisterStep3} 
+      />
+      <Stack.Screen 
+        options={{ title: 'Cadastro' }} 
+        name="RegisterStep4" 
+        component={RegisterStep4} 
       />
       <Stack.Screen 
         options={{ headerShown: false }} 
