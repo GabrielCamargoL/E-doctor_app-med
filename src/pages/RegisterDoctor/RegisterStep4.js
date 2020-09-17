@@ -6,20 +6,45 @@ import {
   Avatar,
   ButtonSend,
   ButtonSendView,
-  AccessCamera,
+  ButtonSendText,
+  AccessPhotosView,
+  AccessPhotosButton,
+  AccessPhotosText,
 } from './styles';
 
 import { Text, View, Image } from 'react-native';
-import { TouchableOpacity } from 'react-native-gesture-handler';
+import { Icon } from 'native-base';
+import ImagePicker from 'react-native-image-crop-picker';
 
-import api from '../../services/api';
 import SuccessRegister from '../../components/SuccessRegister';
-import { set } from 'react-native-reanimated';
+import api from '../../services/api';
+
 
 export default function RegisterStep4({ navigation }) {
-  const [teste, setTeste] = useState(false);
+  const [avatar, setAvatar] = useState([]);
   async function sendPhoto() {
     return setTeste(true);
+  }
+
+  async function AccessCamera() {
+    ImagePicker.openCamera({
+      width: 300,
+      height: 400,
+      cropping: false,
+    }).then(file => {
+      setAvatar(file);
+    });
+  }
+
+  async function AccessGallery() {
+    ImagePicker.openPicker({
+      multiple: false,
+      maxFiles: 1,
+      mediaType: 'photo',
+    }).then(file => {
+        setAvatar(file);
+      }
+    );
   }
 
   return (
@@ -29,26 +54,56 @@ export default function RegisterStep4({ navigation }) {
           Tire uma foto de seu rosto
         </SubTitle>
 
-        <Avatar source={require('../../assets/Avatar.png')} />
+        {
+          avatar.length < 1 ? 
+          <Avatar source={require('../../assets/Avatar.png')} />
+        :
+          <>
+            <Avatar source={uri=''} />
+          </>
+        }
 
         <ButtonSendView>
-          <ButtonSend onPress={sendPhoto} title={"Enviar"} />
+          <ButtonSend onPress={sendPhoto}>
+            <ButtonSendText>Enviar</ButtonSendText>
+          </ButtonSend>
         </ButtonSendView>
 
-        <AccessCamera>
 
-        </AccessCamera>
-        {
-          teste ?
-            <>
-              <SuccessRegister />
-            </>
-            :
-            <>
-            </>
-        }
+        <AccessPhotosView>
+          <AccessPhotosButton onPress={() => AccessCamera()}>
+            <Icon
+              onPress={() => { }}
+              type="FontAwesome"
+              resizeMode="contain"
+              name="camera"
+              style={{
+                color: '#fff',
+                marginRight: 5,
+              }}
+            />
+            <AccessPhotosText>
+              Camera
+            </AccessPhotosText>
+          </AccessPhotosButton>
+
+          <AccessPhotosButton onPress={() => AccessGallery()}>
+            <Icon
+              type="FontAwesome"
+              resizeMode="contain"
+              name="photo"
+              style={{
+                color: '#fff',
+                marginRight: 5,
+              }}
+            />
+            <AccessPhotosText>
+              Galeria
+            </AccessPhotosText>
+          </AccessPhotosButton>
+        </AccessPhotosView>
+
       </Container>
-
     </>
   )
 }
