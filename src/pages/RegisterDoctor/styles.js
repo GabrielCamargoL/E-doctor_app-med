@@ -131,9 +131,8 @@ export const AccessPhotosButton = styled.TouchableOpacity`
   justify-content:center;
   align-items:center;
   background-color:#7915C1;
-  margin-top: 100;
   width:48%;
-  height: 40px;
+  height: 55px;
   border:solid;
   border-color:#fff;
 `;

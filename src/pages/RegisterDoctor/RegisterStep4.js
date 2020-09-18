@@ -12,7 +12,7 @@ import {
   AccessPhotosText,
 } from './styles';
 
-import { Text, View, Image } from 'react-native';
+import { Text, View, Image, Alert } from 'react-native';
 import { Icon } from 'native-base';
 import ImagePicker from 'react-native-image-crop-picker';
 
@@ -22,15 +22,12 @@ import api from '../../services/api';
 
 export default function RegisterStep4({ navigation }) {
   const [avatar, setAvatar] = useState([]);
-  async function sendPhoto() {
-    return setTeste(true);
-  }
 
   async function AccessCamera() {
     ImagePicker.openCamera({
       width: 300,
       height: 400,
-      cropping: false,
+      cropping: true,
     }).then(file => {
       setAvatar(file);
     });
@@ -38,29 +35,44 @@ export default function RegisterStep4({ navigation }) {
 
   async function AccessGallery() {
     ImagePicker.openPicker({
-      multiple: false,
-      maxFiles: 1,
+      cropping: false,
       mediaType: 'photo',
     }).then(file => {
-        setAvatar(file);
-      }
+      console.log(file)
+      setAvatar(file);
+    }
     );
+  }
+
+  async function sendPhoto() {
+    if (avatar.length < 1) {
+      return Alert.alert("Atenção",
+        "Envie uma foto para completar seu perfil.",
+        [{ text: "Camera", onPress: () => AccessCamera() },
+         { text: "Galeria", onPress: () => AccessGallery() }],
+        { cancelable: false }
+      );
+    }
   }
 
   return (
     <>
       <Container>
-        <SubTitle style={{ alignSelf: 'center' }}>
+        <SubTitle style={{ alignSelf: 'center', marginTop: 50 }}>
           Tire uma foto de seu rosto
         </SubTitle>
 
         {
-          avatar.length < 1 ? 
-          <Avatar source={require('../../assets/Avatar.png')} />
-        :
-          <>
-            <Avatar source={uri=''} />
-          </>
+          avatar.length < 1 ?
+            <Avatar source={require('../../assets/Avatar.png')} />
+            :
+            <>
+              <Avatar
+                source={{ uri: avatar.path }}
+                style={{ width: 200, height: 200, marginLeft: 1 }}
+                resizeMode="contain"
+              />
+            </>
         }
 
         <ButtonSendView>
@@ -69,41 +81,40 @@ export default function RegisterStep4({ navigation }) {
           </ButtonSend>
         </ButtonSendView>
 
-
-        <AccessPhotosView>
-          <AccessPhotosButton onPress={() => AccessCamera()}>
-            <Icon
-              onPress={() => { }}
-              type="FontAwesome"
-              resizeMode="contain"
-              name="camera"
-              style={{
-                color: '#fff',
-                marginRight: 5,
-              }}
-            />
-            <AccessPhotosText>
-              Camera
-            </AccessPhotosText>
-          </AccessPhotosButton>
-
-          <AccessPhotosButton onPress={() => AccessGallery()}>
-            <Icon
-              type="FontAwesome"
-              resizeMode="contain"
-              name="photo"
-              style={{
-                color: '#fff',
-                marginRight: 5,
-              }}
-            />
-            <AccessPhotosText>
-              Galeria
-            </AccessPhotosText>
-          </AccessPhotosButton>
-        </AccessPhotosView>
-
       </Container>
+
+      <AccessPhotosView>
+        <AccessPhotosButton onPress={() => AccessCamera()}>
+          <Icon
+            onPress={() => { }}
+            type="FontAwesome"
+            resizeMode="contain"
+            name="camera"
+            style={{
+              color: '#fff',
+              marginRight: 5,
+            }}
+          />
+          <AccessPhotosText>
+            Camera
+            </AccessPhotosText>
+        </AccessPhotosButton>
+
+        <AccessPhotosButton onPress={() => AccessGallery()}>
+          <Icon
+            type="FontAwesome"
+            resizeMode="contain"
+            name="photo"
+            style={{
+              color: '#fff',
+              marginRight: 5,
+            }}
+          />
+          <AccessPhotosText>
+            Galeria
+            </AccessPhotosText>
+        </AccessPhotosButton>
+      </AccessPhotosView>
     </>
   )
 }
