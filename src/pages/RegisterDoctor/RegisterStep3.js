@@ -20,7 +20,10 @@ import { TouchableOpacity } from 'react-native-gesture-handler';
 import api from '../../services/api';
 
 
-export default function RegisterStep3({ navigation }) {
+export default function RegisterStep3({ navigation, route }) {
+
+  let doctorInfo = route.params.doctorInfo;
+  console.log(doctorInfo)
 
   const [specialty, setSpecialty] = useState('');
   const [crm, setCrm] = useState('');
@@ -37,14 +40,28 @@ export default function RegisterStep3({ navigation }) {
   const options = [{ key: false, value: 'Não' }, { key: true, value: 'Sim' }]
 
   async function handleAdvance() {
-    return navigation.navigate('RegisterStep4');
+    return navigation.navigate('RegisterStep4', {
+      doctorInfo,
+      clinicInfo: {
+        specialty,
+        crm,
+        home_clinic,
+        clinic_cep,
+        clinic_street,
+        clinic_neighborhood,
+        clinic_number,
+        clinic_complement,
+        clinic_uf,
+        clinic_city
+      }
+    });
   }
 
   return (
     <>
       <Container>
         <SubTitle>Dados Profissionais</SubTitle>
-        
+
         <InputContainer>
           <View style={{
             backgroundColor: '#fff',
@@ -148,18 +165,18 @@ export default function RegisterStep3({ navigation }) {
               />
             </InputContainer>
 
-            <View style={{ flexDirection: 'row', alignItems:'center' }}>
+            <View style={{ flexDirection: 'row', alignItems: 'center' }}>
               <InputContainer>
-              <View style={{
-                backgroundColor: '#fff',
-                paddingHorizontal: 10,
-                top: 10,
-                left: 25,
-                zIndex: 50,
-                width: '50%',
-              }}>
-                <Text style={{ fontSize: 16 }}>Número</Text>
-              </View>
+                <View style={{
+                  backgroundColor: '#fff',
+                  paddingHorizontal: 10,
+                  top: 10,
+                  left: 25,
+                  zIndex: 50,
+                  width: '50%',
+                }}>
+                  <Text style={{ fontSize: 16 }}>Número</Text>
+                </View>
                 <HalfInputLabel
                   placeholder="Especialidade"
                   placeholderTextColor="#A8A8A8"
@@ -169,7 +186,7 @@ export default function RegisterStep3({ navigation }) {
                 />
               </InputContainer>
 
-              <CheckBox value={HouseWithoutNumber} onValueChange={setHouseWithoutNumber}/>
+              <CheckBox value={HouseWithoutNumber} onValueChange={setHouseWithoutNumber} />
               <Text> Endereço sem Número</Text>
             </View>
 
@@ -193,18 +210,18 @@ export default function RegisterStep3({ navigation }) {
               />
             </InputContainer>
 
-            <View style={{ flexDirection: 'row', alignItems:'flex-start' }}>
+            <View style={{ flexDirection: 'row', alignItems: 'flex-start' }}>
               <InputContainer>
-              <View style={{
-                backgroundColor: '#fff',
-                paddingHorizontal: 10,
-                top: 10,
-                left: 25,
-                zIndex: 50,
-                width: '23%',
-              }}>
-                <Text style={{ fontSize: 16 }}>UF</Text>
-              </View>
+                <View style={{
+                  backgroundColor: '#fff',
+                  paddingHorizontal: 10,
+                  top: 10,
+                  left: 25,
+                  zIndex: 50,
+                  width: '23%',
+                }}>
+                  <Text style={{ fontSize: 16 }}>UF</Text>
+                </View>
                 <SmallInputLabel
                   placeholder="SP"
                   placeholderTextColor="#A8A8A8"
@@ -215,16 +232,16 @@ export default function RegisterStep3({ navigation }) {
               </InputContainer>
 
               <InputContainer>
-              <View style={{
-                backgroundColor: '#fff',
-                paddingHorizontal: 10,
-                top: 10,
-                left: 25,
-                zIndex: 50,
-                width: '50%',
-              }}>
-                <Text style={{ fontSize: 16 }}>Cidade</Text>
-              </View>
+                <View style={{
+                  backgroundColor: '#fff',
+                  paddingHorizontal: 10,
+                  top: 10,
+                  left: 25,
+                  zIndex: 50,
+                  width: '50%',
+                }}>
+                  <Text style={{ fontSize: 16 }}>Cidade</Text>
+                </View>
                 <HalfInputLabel
                   placeholder="Cidade"
                   placeholderTextColor="#A8A8A8"

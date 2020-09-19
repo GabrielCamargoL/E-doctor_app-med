@@ -20,8 +20,11 @@ import SuccessRegister from '../../components/SuccessRegister';
 import api from '../../services/api';
 
 
-export default function RegisterStep4({ navigation }) {
-  const [avatar, setAvatar] = useState([]);
+export default function RegisterStep4({ navigation, route }) {
+  let doctorInfo = route.params.doctorInfo;
+  let clinicInfo = route.params.clinicInfo;
+
+  const [avatar, setAvatar] = useState({});
 
   async function AccessCamera() {
     ImagePicker.openCamera({
@@ -35,17 +38,16 @@ export default function RegisterStep4({ navigation }) {
 
   async function AccessGallery() {
     ImagePicker.openPicker({
-      cropping: false,
+      cropping: true,
       mediaType: 'photo',
     }).then(file => {
       console.log(file)
       setAvatar(file);
-    }
-    );
+    });
   }
 
   async function sendPhoto() {
-    if (avatar.length < 1) {
+    if (Object.keys(avatar).length === 0) {
       return Alert.alert("Atenção",
         "Envie uma foto para completar seu perfil.",
         [{ text: "Camera", onPress: () => AccessCamera() },
@@ -53,6 +55,12 @@ export default function RegisterStep4({ navigation }) {
         { cancelable: false }
       );
     }
+
+    return navigation.navigate('RegisterSuccess' , {
+      doctorInfo,
+      clinicInfo,
+      avatar
+    });
   }
 
   return (
@@ -63,7 +71,7 @@ export default function RegisterStep4({ navigation }) {
         </SubTitle>
 
         {
-          avatar.length < 1 ?
+          Object.keys(avatar).length === 0 ?
             <Avatar source={require('../../assets/Avatar.png')} />
             :
             <>

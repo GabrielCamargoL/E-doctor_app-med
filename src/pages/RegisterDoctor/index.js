@@ -16,7 +16,7 @@ import api from '../../services/api';
 
 
 export default function RegisterDoctor({ navigation }) {
-  
+
   const [name, setName] = useState('');
   const [cpf, setCpf] = useState('');
   const [email, setEmail] = useState('');
@@ -26,14 +26,22 @@ export default function RegisterDoctor({ navigation }) {
 
 
   async function handleAdvance() {
-    return navigation.navigate('RegisterStep2');
+    navigation.navigate('RegisterStep2', {
+      doctorInfo: {
+        name,
+        cpf,
+        email,
+        phone,
+        password
+      }
+    });
   }
 
   return (
     <>
       <Container>
         <SubTitle> Dados Pessoal </SubTitle>
-      
+
         <InputContainer>
           <LabelContainer>
             <Text style={{ fontSize: 16 }}>Nome</Text>
@@ -125,7 +133,8 @@ export default function RegisterDoctor({ navigation }) {
           />
         </InputContainer>
 
-        <TouchableOpacity onPress={handleAdvance}>
+        <TouchableOpacity
+          onPress={() => handleAdvance()}>
           <View style={{ alignItems: 'center' }}>
             <Advance>Avançar</Advance>
           </View>
