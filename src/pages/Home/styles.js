@@ -30,10 +30,12 @@ export const ViewTitle = styled.View`
 
 export const Title = styled.Text`
   margin-top: 20;
+  margin-left: 20;
+  margin-bottom: 20;
   font-family: Roboto-Bold;
   font-style: normal;
   font-weight: bold;
-  font-size: 24;
+  font-size: 18;
   color: #767272;
 `;
 
@@ -169,9 +171,9 @@ export const TextButton = styled.Text`
 
 export const TabMenu = styled.Text`
   color: #000;
-  text-transform: uppercase;
-  font-size: 16;
+  text-transform: capitalize;
   font-family: Roboto-Bold;
+  font-size: 12
 `;
 
 export const ButtonView = styled.View`
@@ -193,4 +195,12 @@ export const ButtonFilterText = styled.Text`
   color: #fff;
   font-size: 14;
   font-family: Roboto-Bold;
+`;
+
+export const Logo = styled.Image`
+  width: 90%;
+  height:250;
+  align-self:center;
+  margin-top:50;
+  margin-bottom:20;
 `;
