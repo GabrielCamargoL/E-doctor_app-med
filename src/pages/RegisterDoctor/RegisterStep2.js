@@ -2,16 +2,13 @@ import React, { useState, useEffect } from 'react';
 
 import {
   Container,
+  Row,
+  Col,
   SubTitle,
-  LabelContainer,
+  LabelInput,
   InputLabel,
-  HalfInputLabel,
-  SmallInputLabel,
   InputContainer,
   Advance,
-  Circle,
-  CheckedCircle,
-  ButtonContainer,
 } from './styles';
 
 import { Text, View, CheckBox } from 'react-native';
@@ -28,7 +25,7 @@ export default function RegisterStep2({ navigation, route }) {
   const [neighborhood, setNeighborhood] = useState('');
   const [number, setNumber] = useState('');
   const [HouseWithoutNumber, setHouseWithoutNumber] = useState(false);
-  const [complement, setComplement] = useState('');
+  const [complement_address, setComplementAddress] = useState('');
   const [uf, setUf] = useState('');
   const [city, setCity] = useState('');
 
@@ -41,7 +38,7 @@ export default function RegisterStep2({ navigation, route }) {
         street,
         neighborhood,
         number,
-        complement,
+        complement_address,
         uf,
         city
       }
@@ -51,147 +48,112 @@ export default function RegisterStep2({ navigation, route }) {
 return (
   <>
     <Container>
-      <SubTitle>Endereço Residencial</SubTitle>
+      <SubTitle>Dados Residenciais</SubTitle>
 
-
-      <InputContainer>
-        <LabelContainer>
-          <Text style={{ fontSize: 16 }}> CEP </Text>
-        </LabelContainer>
-        <InputLabel
-          placeholder="CRM"
-          placeholderTextColor="#A8A8A8"
-          keyboardType="default"
-          value={cep}
-          onChangeText={setCep}
-        />
-      </InputContainer>
-
-      <InputContainer>
-        <View style={{
-          backgroundColor: '#fff',
-          paddingHorizontal: 10,
-          top: 10,
-          left: 25,
-          zIndex: 50,
-          width: '33%',
-        }}>
-          <Text style={{ fontSize: 16 }}>Logradouro</Text>
-        </View>
-        <InputLabel
-          placeholder="Logradouro"
-          placeholderTextColor="#A8A8A8"
-          keyboardType="email-address"
-          value={street}
-          onChangeText={setStreet}
-        />
-      </InputContainer>
-
-      <InputContainer>
-        <LabelContainer>
-          <Text style={{ fontSize: 16 }}> Bairro </Text>
-        </LabelContainer>
-        <InputLabel
-          placeholder="Bairro"
-          placeholderTextColor="#A8A8A8"
-          keyboardType="default"
-          value={neighborhood}
-          onChangeText={setNeighborhood}
-        />
-      </InputContainer>
-
-      <View style={{ flexDirection: 'row', alignItems: 'center' }}>
+      <Row>
         <InputContainer>
-          <View style={{
-            backgroundColor: '#fff',
-            paddingHorizontal: 10,
-            top: 10,
-            left: 25,
-            zIndex: 50,
-            width: '50%',
-          }}>
-            <Text style={{ fontSize: 16 }}>Número</Text>
-          </View>
-          <HalfInputLabel
-            placeholder="Especialidade"
+          <LabelInput> CEP </LabelInput>
+          <InputLabel
+            placeholder="00000 000"
             placeholderTextColor="#A8A8A8"
-            keyboardType="number-pad"
-            value={number}
-            onChangeText={setNumber}
+            keyboardType="default"
+            value={cep}
+            onChangeText={setCep}
           />
         </InputContainer>
+      </Row>
+
+      <Row>
+        <InputContainer>
+          <LabelInput >Logradouro</LabelInput>
+          <InputLabel
+            placeholder="Logradouro"
+            placeholderTextColor="#A8A8A8"
+            keyboardType="email-address"
+            value={street}
+            onChangeText={setStreet}
+          />
+        </InputContainer>
+      </Row>
+
+      <Row>
+        <InputContainer>
+          <LabelInput > Bairro </LabelInput>
+          <InputLabel
+            placeholder="Bairro"
+            placeholderTextColor="#A8A8A8"
+            keyboardType="default"
+            value={neighborhood}
+            onChangeText={setNeighborhood}
+          />
+        </InputContainer>
+      </Row>
+
+      <Row style={{ alignItems: 'center' }}>
+        <Col style={{ width: '45%' }}>
+          <InputContainer>
+            <LabelInput >Número</LabelInput>
+            <InputLabel
+              placeholder="248"
+              placeholderTextColor="#A8A8A8"
+              keyboardType="number-pad"
+              value={number}
+              onChangeText={setNumber}
+            />
+          </InputContainer>
+        </Col>
 
         <CheckBox value={HouseWithoutNumber} onValueChange={setHouseWithoutNumber} />
-        <Text> Endereço sem Número</Text>
-      </View>
+        <LabelInput> Endereço sem Número</LabelInput>
+      </Row>
 
-      <InputContainer>
-        <View style={{
-          backgroundColor: '#fff',
-          paddingHorizontal: 10,
-          top: 10,
-          left: 25,
-          zIndex: 50,
-          width: '33%',
-        }}>
-          <Text style={{ fontSize: 16 }}>Complemento</Text>
-        </View>
-        <InputLabel
-          placeholder="Especialidade"
-          placeholderTextColor="#A8A8A8"
-          keyboardType="email-address"
-          value={complement}
-          onChangeText={setComplement}
-        />
-      </InputContainer>
-
-      <View style={{ flexDirection: 'row', alignItems: 'flex-start' }}>
+      <Row>
         <InputContainer>
-          <View style={{
-            backgroundColor: '#fff',
-            paddingHorizontal: 10,
-            top: 10,
-            left: 25,
-            zIndex: 50,
-            width: '23%',
-          }}>
-            <Text style={{ fontSize: 16 }}>UF</Text>
-          </View>
-          <SmallInputLabel
-            placeholder="SP"
+          <LabelInput >Complemento</LabelInput>
+          <InputLabel
+            placeholder="Complemento"
             placeholderTextColor="#A8A8A8"
-            keyboardType="number-pad"
-            value={uf}
-            onChangeText={setUf}
+            keyboardType="email-address"
+            value={complement_address}
+            onChangeText={setComplementAddress}
           />
         </InputContainer>
+      </Row>
 
-        <InputContainer>
-          <View style={{
-            backgroundColor: '#fff',
-            paddingHorizontal: 10,
-            top: 10,
-            left: 25,
-            zIndex: 50,
-            width: '50%',
-          }}>
-            <Text style={{ fontSize: 16 }}>Cidade</Text>
-          </View>
-          <HalfInputLabel
-            placeholder="Cidade"
-            placeholderTextColor="#A8A8A8"
-            keyboardType="number-pad"
-            value={city}
-            onChangeText={setCity}
-          />
-        </InputContainer>
-      </View>
+      <Row>
+        <Col style={{ width: '20%' }}>
+          <InputContainer>
+            <LabelInput >UF</LabelInput>
+            <InputLabel
+              placeholder="SP"
+              placeholderTextColor="#A8A8A8"
+              keyboardType="number-pad"
+              value={uf}
+              onChangeText={setUf}
+            />
+          </InputContainer>
+        </Col>
 
-      <TouchableOpacity onPress={handleAdvance}>
-        <View style={{ alignItems: 'center' }}>
-          <Advance>Avançar</Advance>
-        </View>
-      </TouchableOpacity>
+        <Col style={{ width: '80%' }}>
+          <InputContainer>
+            <LabelInput >Cidade</LabelInput>
+            <InputLabel
+              placeholder="Cidade"
+              placeholderTextColor="#A8A8A8"
+              keyboardType="number-pad"
+              value={city}
+              onChangeText={setCity}
+            />
+          </InputContainer>
+        </Col>
+      </Row>
+
+      <Row style={{ justifyContent: 'center' }}>
+        <TouchableOpacity onPress={handleAdvance}>
+          <Advance> Avançar </Advance>
+        </TouchableOpacity>
+      </Row>
+
     </Container>
   </>
 )

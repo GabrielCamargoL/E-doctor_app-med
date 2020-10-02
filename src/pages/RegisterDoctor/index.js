@@ -2,14 +2,14 @@ import React, { useState, useEffect } from 'react';
 
 import {
   Container,
+  Row,
   SubTitle,
-  LabelContainer,
+  LabelInput,
   InputLabel,
   InputContainer,
   Advance,
 } from './styles';
 
-import { Text, View, StyleSheet, Button } from 'react-native';
 import { TouchableOpacity } from 'react-native-gesture-handler';
 
 import api from '../../services/api';
@@ -17,7 +17,8 @@ import api from '../../services/api';
 
 export default function RegisterDoctor({ navigation }) {
 
-  const [name, setName] = useState('');
+  const [username, setUsername] = useState('');
+  const [surname, setSurname] = useState('');
   const [cpf, setCpf] = useState('');
   const [email, setEmail] = useState('');
   const [phone, setPhone] = useState('');
@@ -28,7 +29,8 @@ export default function RegisterDoctor({ navigation }) {
   async function handleAdvance() {
     navigation.navigate('RegisterStep2', {
       doctorInfo: {
-        name,
+        username,
+        surname,
         cpf,
         email,
         phone,
@@ -42,103 +44,106 @@ export default function RegisterDoctor({ navigation }) {
       <Container>
         <SubTitle> Dados Pessoal </SubTitle>
 
-        <InputContainer>
-          <LabelContainer>
-            <Text style={{ fontSize: 16 }}>Nome</Text>
-          </LabelContainer>
-          <InputLabel
-            placeholder="Email ou Usuário"
-            placeholderTextColor="#A8A8A8"
-            keyboardType="email-address"
-            value={name}
-            onChangeText={setName}
-          />
-        </InputContainer>
+        <Row>
+          <InputContainer>
+            <LabelInput>Nome</LabelInput>
+            <InputLabel
+              placeholder="José da Silva"
+              placeholderTextColor="#A8A8A8"
+              keyboardType="email-address"
+              value={username}
+              onChangeText={setUsername}
+            />
+          </InputContainer>
+        </Row>
 
-        <InputContainer>
-          <LabelContainer>
-            <Text style={{ fontSize: 16 }}> CPF </Text>
-          </LabelContainer>
-          <InputLabel
-            placeholder="Senha"
-            placeholderTextColor="#A8A8A8"
-            keyboardType="default"
-            password={true}
-            value={cpf}
-            onChangeText={setCpf}
-            secureTextEntry={true}
-          />
-        </InputContainer>
+        <Row>
+          <InputContainer>
+            <LabelInput>Sobrenome</LabelInput>
+            <InputLabel
+              placeholder="José da Silva"
+              placeholderTextColor="#A8A8A8"
+              keyboardType="email-address"
+              value={surname}
+              onChangeText={setSurname}
+            />
+          </InputContainer>
+        </Row>
 
-        <InputContainer>
-          <LabelContainer>
-            <Text style={{ fontSize: 16 }}>E-mail</Text>
-          </LabelContainer>
-          <InputLabel
-            placeholder="Email ou Usuário"
-            placeholderTextColor="#A8A8A8"
-            keyboardType="email-address"
-            value={email}
-            onChangeText={setEmail}
-          />
-        </InputContainer>
+        <Row>
+          <InputContainer>
+            <LabelInput> CPF </LabelInput>
+            <InputLabel
+              placeholder="999999999-99"
+              placeholderTextColor="#A8A8A8"
+              keyboardType="default"
+              value={cpf}
+              onChangeText={setCpf}
+            />
+          </InputContainer>
+        </Row>
 
-        <InputContainer>
-          <LabelContainer>
-            <Text style={{ fontSize: 16 }}>Telefone</Text>
-          </LabelContainer>
-          <InputLabel
-            placeholder="99999-9999"
-            placeholderTextColor="#A8A8A8"
-            keyboardType="phone-pad"
-            value={phone}
-            onChangeText={setPhone}
-          />
-        </InputContainer>
+        <Row>
+          <InputContainer>
+            <LabelInput>E-mail</LabelInput>
+            <InputLabel
+              placeholder="josé@email.com"
+              placeholderTextColor="#A8A8A8"
+              keyboardType="email-address"
+              value={email}
+              onChangeText={setEmail}
+            />
+          </InputContainer>
+        </Row>
 
-        <InputContainer>
-          <LabelContainer>
-            <Text style={{ fontSize: 16 }}>Senha</Text>
-          </LabelContainer>
-          <InputLabel
-            placeholder="Email ou Usuário"
-            placeholderTextColor="#A8A8A8"
-            keyboardType="email-address"
-            value={password}
-            secureTextEntry={true}
-            password={true}
-            onChangeText={setPassword}
-          />
-        </InputContainer>
+        <Row>
+          <InputContainer>
+            <LabelInput>Telefone</LabelInput>
+            <InputLabel
+              placeholder="99999-9999"
+              placeholderTextColor="#A8A8A8"
+              keyboardType="phone-pad"
+              value={phone}
+              onChangeText={setPhone}
+            />
+          </InputContainer>
+        </Row>
 
-        <InputContainer>
-          <View style={{
-            backgroundColor: '#fff',
-            paddingHorizontal: 10,
-            top: 10,
-            left: 25,
-            zIndex: 50,
-            width: '40%',
-          }}>
-            <Text style={{ fontSize: 16 }}>Confirme a senha</Text>
-          </View>
-          <InputLabel
-            placeholder="Email ou Usuário"
-            placeholderTextColor="#A8A8A8"
-            keyboardType="email-address"
-            value={passwordConfirm}
-            secureTextEntry={true}
-            password={true}
-            onChangeText={setPasswordConfirm}
-          />
-        </InputContainer>
+        <Row>
+          <InputContainer>
+            <LabelInput style={{ fontSize: 16 }}>Senha</LabelInput>
+            <InputLabel
+              placeholder="********"
+              placeholderTextColor="#A8A8A8"
+              keyboardType="email-address"
+              value={password}
+              password={true}
+              secureTextEntry={true}
+              onChangeText={setPassword}
+            />
+          </InputContainer>
+        </Row>
 
-        <TouchableOpacity
-          onPress={() => handleAdvance()}>
-          <View style={{ alignItems: 'center' }}>
+        <Row>
+          <InputContainer>
+            <LabelInput>Confirme a senha</LabelInput>
+            <InputLabel
+              placeholder="********"
+              placeholderTextColor="#A8A8A8"
+              keyboardType="email-address"
+              value={passwordConfirm}
+              password={true}
+              secureTextEntry={true}
+              onChangeText={setPasswordConfirm}
+            />
+          </InputContainer>
+        </Row>
+
+        <Row style={{ justifyContent: 'center' }}>
+          <TouchableOpacity onPress={() => handleAdvance()}>
             <Advance>Avançar</Advance>
-          </View>
-        </TouchableOpacity>
+          </TouchableOpacity>
+        </Row>
       </Container>
     </>
   )

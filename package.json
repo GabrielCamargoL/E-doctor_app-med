@@ -18,8 +18,8 @@
     "axios": "^0.19.2",
     "lottie-react-native": "^3.4.0",
     "native-base": "^2.13.14",
-    "react": "16.11.0",
-    "react-native": "0.62.2",
+    "react": "^16.13.1",
+    "react-native": "^0.63.2",
     "react-native-calendars": "^1.403.0",
     "react-native-gesture-handler": "^1.6.1",
     "react-native-image-crop-picker": "^0.34.1",
@@ -29,7 +29,7 @@
     "react-native-safe-area-context": "^3.0.7",
     "react-native-screens": "^2.9.0",
     "react-native-vector-icons": "^7.0.0",
-    "styled-components": "^5.1.1",
+    "styled-components": "^5.2.0",
     "yarn": "^1.22.5"
   },
   "devDependencies": {
