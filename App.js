@@ -10,7 +10,7 @@ export default function navinext() {
   return (
     <NavigationContainer>
       <StatusBar translucent backgroundColor={colors.primary} />
-      <Routes />
+      <Routes/>
     </NavigationContainer>
   );
 }

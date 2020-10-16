@@ -24,14 +24,14 @@ export default function RegisterStep4({ navigation, route }) {
   let doctorInfo = route.params.doctorInfo;
   let clinicInfo = route.params.clinicInfo;
 
-  const [photo, setPhoto] = useState({});
+  const [photo, setPhoto] = useState([]);
   const [success, setSuccess] = useState(false);
 
   async function AccessCamera() {
     ImagePicker.openCamera({
       width: 300,
       height: 400,
-      cropping: true,
+      cropping: false,
     }).then(file => {
       setPhoto(file);
     });
@@ -39,16 +39,15 @@ export default function RegisterStep4({ navigation, route }) {
 
   async function AccessGallery() {
     ImagePicker.openPicker({
-      cropping: true,
+      cropping: false,
       mediaType: 'photo',
     }).then(file => {
       setPhoto(file);
     });
   }
 
-  
+
   async function sendPhoto() {
-    alert('entrou na função')
     if (Object.keys(photo).length === 0) {
       return Alert.alert("Atenção",
         "Envie uma foto para completar seu perfil.",
@@ -59,42 +58,35 @@ export default function RegisterStep4({ navigation, route }) {
     }
 
     try {
-      alert('dentro do try')
       const responseDoctor = await api.post('/doctorAuth/signUp', {
-        "username": doctorInfo.name,
+        "username": doctorInfo.username,
         "surname": doctorInfo.surname,
         "email": doctorInfo.email,
         "password": doctorInfo.password,
         "cpf": doctorInfo.cpf,
-        "crm": doctorInfo.cpf,
+        "crm": doctorInfo.crm,
         "genre": doctorInfo.genre,
         "birthday": doctorInfo.birthday,
         "celphone": doctorInfo.celphone,
         "zip_code": doctorInfo.zip_code,
         "house_number": doctorInfo.house_number,
         "complement_address": doctorInfo.complement_address,
-        "state": doctorInfo.state,
+        "state": doctorInfo.uf,
         "city": doctorInfo.city,
-        "doctor_premium": null,
         "neighborhood": doctorInfo.neighborhood,
         "street": doctorInfo.street,
         "specialty": doctorInfo.specialty,
       },
-      {
-        headers: {
-          'Content-Type': 'application/json',
-        }
-      })
-      console.log('Requisição SignUp Doutor: ' + responseDoctorInfo)
-      alert('passou da req')
-      
-      
-      registerClinic(responseDoctor.data.id)
-      
-      uploadPhoto(responseDoctor.data.id)
-      
-      return setSuccess(true)
-      
+        {
+          headers: {
+            'Content-Type': 'application/json',
+          }
+        })
+
+      if (uploadPhoto(responseDoctor.data.id) && registerClinic(responseDoctor.data.id)) {
+        return setSuccess(true)
+      }
+
     } catch (err) {
       alert('sendPhoto: ' + err)
       console.log('sendPhoto: ' + err)
@@ -104,42 +96,55 @@ export default function RegisterStep4({ navigation, route }) {
 
   async function registerClinic(id) {
     try {
-      const responseClinic = await api.post(`/clinicAuth/create/${responseDoctor.data.id}`, {
-        clinicInfo
+      const responseClinic = await api.post(`/clinicAuth/create/${id}`, {
+        'name': clinicInfo.name,
+        'zip_code': clinicInfo.clinic_cep,
+        'house_number': clinicInfo.clinic_number,
+        'complement_address': clinicInfo.clinic_complement,
+        'state': clinicInfo.clinic_uf,
+        'city': clinicInfo.clinic_city,
+        'neighborhood': clinicInfo.clinic_neighborhood,
+        'street': clinicInfo.clinic_street,
       })
       console.log('responseClinic: ' + responseClinic)
 
-      return
+      return true
 
     } catch (err) {
-      console.log(`foto: ${err}`);
+      console.log(`clinic: ${err}`);
       alert('foto: ' + err.message);
     }
   }
-  
+
   async function uploadPhoto(id) {
     try {
       const formData = new FormData();
+
       for (var key of Object.keys(photo)) {
         formData.append('image', {
           uri: photo[key].path,
           type: photo[key].mime,
-          name: `${photo[key].path}.${photo[key].mime}`,
+          name: '0.jpg',
         });
       }
 
-      const responsePhoto = await api.post(`/doctorAuth/uploadPhoto/${id}`, formData, {
+      const response = await api.post(`/doctorAuth/uploadPhoto/${id}`, formData, {
         headers: {
           'Content-Type': 'multipart/form-data',
         },
+      }).then((res) => {
+        console.log(res.data);
+        return res.data;
       })
-      console.log(formData);
 
-      return
+      console.log(response)
+
+      return true
 
     } catch (err) {
       console.log(`foto: ${err}`);
       alert('foto: ' + err.message);
+      return false;
     }
   }
 
@@ -154,7 +159,7 @@ export default function RegisterStep4({ navigation, route }) {
         :
         <>
           <Container>
-            <SubTitle style={{ alignSelf: 'center', marginTop: 50 }}>
+            <SubTitle style={{ alignSelf: 'center', marginTop: 100 }}>
               Tire uma foto de seu rosto
             </SubTitle>
 

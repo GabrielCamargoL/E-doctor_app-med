@@ -8,7 +8,8 @@ import {
   LabelInput,
   InputLabel,
   InputContainer,
-  Advance,
+  ButtonSend,
+  ButtonSendText,
   Circle,
   CheckedCircle,
   ButtonContainer,
@@ -23,7 +24,6 @@ import api from '../../services/api';
 export default function RegisterStep3({ navigation, route }) {
 
   let doctorInfo = route.params.doctorInfo;
-  console.log(doctorInfo)
 
   const [specialty, setSpecialty] = useState('');
   const [crm, setCrm] = useState('');
@@ -79,7 +79,7 @@ export default function RegisterStep3({ navigation, route }) {
 
         <Row>
           <InputContainer>
-              <LabelInput style={{ fontSize: 16 }}> CRM </LabelInput>
+            <LabelInput style={{ fontSize: 16 }}> CRM </LabelInput>
             <InputLabel
               placeholder="CRM"
               placeholderTextColor="#A8A8A8"
@@ -90,9 +90,9 @@ export default function RegisterStep3({ navigation, route }) {
           </InputContainer>
         </Row>
 
-          <SubTitle style={{ marginTop: 25 }}>Consultorio</SubTitle>
+        <SubTitle style={{ marginTop: 25 }}>Consultorio</SubTitle>
 
-          <LabelInput style={{ fontSize: 16, marginLeft: 10 }}>Consultório Residencial?</LabelInput>
+        <LabelInput style={{ fontSize: 16, marginLeft: 10 }}>Consultório Residencial?</LabelInput>
 
 
         <View style={{ flexDirection: 'row', alignSelf: 'flex-start', margin: 10 }}>
@@ -155,8 +155,8 @@ export default function RegisterStep3({ navigation, route }) {
             </Row>
 
 
-            <Row style={{alignItems:'center'}}>
-              <Col style={{width:'48%'}}>
+            <Row style={{ alignItems: 'center' }}>
+              <Col style={{ width: '48%' }}>
                 <InputContainer>
                   <LabelInput style={{ fontSize: 16 }}>Número</LabelInput>
                   <InputLabel
@@ -169,7 +169,7 @@ export default function RegisterStep3({ navigation, route }) {
                 </InputContainer>
               </Col>
 
-              <Col style={{flexDirection:'row'}}>
+              <Col style={{ flexDirection: 'row' }}>
                 <CheckBox value={HouseWithoutNumber} onValueChange={setHouseWithoutNumber} />
                 <Text> Endereço sem Número</Text>
               </Col>
@@ -190,17 +190,17 @@ export default function RegisterStep3({ navigation, route }) {
             </Row>
 
             <Row>
-            <Col style={{width:'20%'}}>
-              <InputContainer>
-                <LabelInput style={{ fontSize: 16 }}>UF</LabelInput>
-                <InputLabel
-                  placeholder="SP"
-                  placeholderTextColor="#A8A8A8"
-                  keyboardType="number-pad"
-                  value={clinic_uf}
-                  onChangeText={setClinicUf}
-                />
-              </InputContainer>
+              <Col style={{ width: '20%' }}>
+                <InputContainer>
+                  <LabelInput style={{ fontSize: 16 }}>UF</LabelInput>
+                  <InputLabel
+                    placeholder="SP"
+                    placeholderTextColor="#A8A8A8"
+                    keyboardType="number-pad"
+                    value={clinic_uf}
+                    onChangeText={setClinicUf}
+                  />
+                </InputContainer>
               </Col>
 
               <InputContainer>
@@ -217,11 +217,11 @@ export default function RegisterStep3({ navigation, route }) {
           </>
         }
 
-        <TouchableOpacity onPress={handleAdvance}>
-          <View style={{ alignItems: 'center' }}>
-            <Advance>Avançar</Advance>
-          </View>
-        </TouchableOpacity>
+        <Row style={{ alignItems: 'center', justifyContent: 'center', marginBottom: 50 }}>
+          <ButtonSend onPress={() => handleAdvance()}>
+            <ButtonSendText>Avançar</ButtonSendText>
+          </ButtonSend>
+        </Row>
       </Container>
     </>
   )

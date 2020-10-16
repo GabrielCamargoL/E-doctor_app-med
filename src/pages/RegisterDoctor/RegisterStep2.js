@@ -8,7 +8,8 @@ import {
   LabelInput,
   InputLabel,
   InputContainer,
-  Advance,
+  ButtonSend,
+  ButtonSendText
 } from './styles';
 
 import { Text, View, CheckBox } from 'react-native';
@@ -23,7 +24,7 @@ export default function RegisterStep2({ navigation, route }) {
   const [cep, setCep] = useState('');
   const [street, setStreet] = useState('');
   const [neighborhood, setNeighborhood] = useState('');
-  const [number, setNumber] = useState('');
+  const [house_number, setHouseNumber] = useState('');
   const [HouseWithoutNumber, setHouseWithoutNumber] = useState(false);
   const [complement_address, setComplementAddress] = useState('');
   const [uf, setUf] = useState('');
@@ -37,7 +38,7 @@ export default function RegisterStep2({ navigation, route }) {
         cep,
         street,
         neighborhood,
-        number,
+        house_number,
         complement_address,
         uf,
         city
@@ -97,8 +98,8 @@ return (
               placeholder="248"
               placeholderTextColor="#A8A8A8"
               keyboardType="number-pad"
-              value={number}
-              onChangeText={setNumber}
+              value={house_number}
+              onChangeText={setHouseNumber}
             />
           </InputContainer>
         </Col>
@@ -148,11 +149,11 @@ return (
         </Col>
       </Row>
 
-      <Row style={{ justifyContent: 'center' }}>
-        <TouchableOpacity onPress={handleAdvance}>
-          <Advance> Avançar </Advance>
-        </TouchableOpacity>
-      </Row>
+      <Row style={{alignItems:'center', justifyContent:'center', marginBottom:50}}>
+          <ButtonSend onPress={() => handleAdvance()}>
+            <ButtonSendText>Avançar</ButtonSendText>
+          </ButtonSend>
+        </Row>
 
     </Container>
   </>

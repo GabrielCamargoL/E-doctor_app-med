@@ -7,7 +7,8 @@ import {
   LabelInput,
   InputLabel,
   InputContainer,
-  Advance,
+  ButtonSend,
+  ButtonSendText
 } from './styles';
 
 import { TouchableOpacity } from 'react-native-gesture-handler';
@@ -21,7 +22,7 @@ export default function RegisterDoctor({ navigation }) {
   const [surname, setSurname] = useState('');
   const [cpf, setCpf] = useState('');
   const [email, setEmail] = useState('');
-  const [phone, setPhone] = useState('');
+  const [celphone, setCelphone] = useState('');
   const [password, setPassword] = useState('');
   const [passwordConfirm, setPasswordConfirm] = useState('');
 
@@ -33,7 +34,7 @@ export default function RegisterDoctor({ navigation }) {
         surname,
         cpf,
         email,
-        phone,
+        celphone,
         password
       }
     });
@@ -48,7 +49,7 @@ export default function RegisterDoctor({ navigation }) {
           <InputContainer>
             <LabelInput>Nome</LabelInput>
             <InputLabel
-              placeholder="José da Silva"
+              placeholder="José"
               placeholderTextColor="#A8A8A8"
               keyboardType="email-address"
               value={username}
@@ -61,7 +62,7 @@ export default function RegisterDoctor({ navigation }) {
           <InputContainer>
             <LabelInput>Sobrenome</LabelInput>
             <InputLabel
-              placeholder="José da Silva"
+              placeholder="Silva"
               placeholderTextColor="#A8A8A8"
               keyboardType="email-address"
               value={surname}
@@ -103,8 +104,8 @@ export default function RegisterDoctor({ navigation }) {
               placeholder="99999-9999"
               placeholderTextColor="#A8A8A8"
               keyboardType="phone-pad"
-              value={phone}
-              onChangeText={setPhone}
+              value={celphone}
+              onChangeText={setCelphone}
             />
           </InputContainer>
         </Row>
@@ -115,10 +116,9 @@ export default function RegisterDoctor({ navigation }) {
             <InputLabel
               placeholder="********"
               placeholderTextColor="#A8A8A8"
-              keyboardType="email-address"
-              value={password}
-              password={true}
               secureTextEntry={true}
+              password={true}
+              value={password}
               onChangeText={setPassword}
             />
           </InputContainer>
@@ -130,19 +130,18 @@ export default function RegisterDoctor({ navigation }) {
             <InputLabel
               placeholder="********"
               placeholderTextColor="#A8A8A8"
-              keyboardType="email-address"
-              value={passwordConfirm}
-              password={true}
               secureTextEntry={true}
+              password={true}
+              value={passwordConfirm}
               onChangeText={setPasswordConfirm}
             />
           </InputContainer>
         </Row>
 
-        <Row style={{ justifyContent: 'center' }}>
-          <TouchableOpacity onPress={() => handleAdvance()}>
-            <Advance>Avançar</Advance>
-          </TouchableOpacity>
+        <Row style={{alignItems:'center', justifyContent:'center', marginBottom:50}}>
+          <ButtonSend onPress={() => handleAdvance()}>
+            <ButtonSendText>Avançar</ButtonSendText>
+          </ButtonSend>
         </Row>
       </Container>
     </>
