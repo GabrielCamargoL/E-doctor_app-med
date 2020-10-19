@@ -24,7 +24,7 @@ export default function RegisterStep4({ navigation, route }) {
   let doctorInfo = route.params.doctorInfo;
   let clinicInfo = route.params.clinicInfo;
 
-  const [photo, setPhoto] = useState([]);
+  const [photo, setPhoto] = useState({});
   const [success, setSuccess] = useState(false);
 
   async function AccessCamera() {
@@ -83,7 +83,7 @@ export default function RegisterStep4({ navigation, route }) {
           }
         })
 
-      if (uploadPhoto(responseDoctor.data.id) && registerClinic(responseDoctor.data.id)) {
+      if (registerClinic(responseDoctor.data.id)) { // posteriormente incluir o upload de foto
         return setSuccess(true)
       }
 
@@ -117,32 +117,29 @@ export default function RegisterStep4({ navigation, route }) {
   }
 
   async function uploadPhoto(id) {
-    try {
-      const formData = new FormData();
+    const formData = new FormData();
+      formData.append('image', {
+        name: 'olar.jpg',
+        uri: photo.path,
+        type: 'image/jpeg'
+      });
 
-      for (var key of Object.keys(photo)) {
-        formData.append('image', {
-          uri: photo[key].path,
-          type: photo[key].mime,
-          name: '0.jpg',
-        });
+    const response = await api.post(`/doctorAuth/uploadPhoto/${id}`, {formData} , {
+      headers: {
+        'content-type': 'multipart/form-data',
+        accept: 'multipart/form-data'
       }
-
-      const response = await api.post(`/doctorAuth/uploadPhoto/${id}`, formData, {
-        headers: {
-          'Content-Type': 'multipart/form-data',
-        },
-      }).then((res) => {
-        console.log(res.data);
-        return res.data;
-      })
+    }).then((res) => {
+      console.log(res.data);
+      return res.data;
+    }).catch(errors => console.log(errors))
+    try {
 
       console.log(response)
 
       return true
 
     } catch (err) {
-      console.log(`foto: ${err}`);
       alert('foto: ' + err.message);
       return false;
     }
