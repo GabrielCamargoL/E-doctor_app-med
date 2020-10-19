@@ -1,5 +1,5 @@
 import styled from 'styled-components/native'; 
-
+import {colors,fonts} from '../../styles';
 export const Container = styled.ScrollView.attrs({
   paddingHorizontal: 10,
 })`
@@ -14,22 +14,22 @@ export const ViewLoad = styled.View`
 `;
 
 export const TextLoad = styled.Text`
-  color: #ff910f;
+  color: ${colors.primary};
   font-family: Roboto;
   font-style: normal;
   font-weight: normal;
   font-size: 18px;
   line-height: 21px;
   text-align: justify;
-  margin-top: 20;
+  margin-top: 20px;
 `;
 
 export const Logo = styled.Image`
   width: 70%;
-  height:150;
+  height:150px;
   align-self:center;
-  margin-top:80;
-  margin-bottom:20;
+  margin-top:80px;
+  margin-bottom:20px;
 `;
 
 export const Content = styled.View.attrs({
@@ -38,21 +38,21 @@ export const Content = styled.View.attrs({
   background-color: #fff;
   align-items: center;
   justify-content: center;
-  margin-top:15;
+  margin-top:15px;
 `;
 
   export const Label = styled.Text`
     color: #3b5998;
-    font-size: 30;
+    font-size: 30px;
     font-family: Roboto-Bold;
-    letter-spacing: 1;
+    letter-spacing: 1px;
   `;
 
 export const InputContainer = styled.View.attrs({
   paddingHorizontal: 10,
 })`
   flex: 1;
-  height: 65;
+  height: 65px;
 `;
 
 
@@ -60,71 +60,71 @@ export const LabelContainer = styled.View.attrs({
   paddingHorizontal: 10,
 })`
   background-color: #fff;
-  top: 10;
-  left: 25;
+  top: 10px;
+  left: 25px;
   z-Index: 50;
   width:20%;
 `;
 
 export const InputLabel = styled.TextInput`
-  border-width: 1;
+  border-width: 1px;
   border-color: #000;
-  height: 45;
-  border-radius: 4;
-  padding-left: 10;
+  height: 45px;
+  border-radius: 4px;
+  padding-left: 10px;
   width: 100%;
 `;
 
 export const Input = styled.TextInput`
-  height: 45;
+  height: 45px;
   width: 100%;
-  border-width: 1;
+  border-width: 1px;
   border-color: #000;
-  border-radius: 4;
-  margin-top: 10;
-  padding-left: 10;
+  border-radius: 4px;
+  margin-top: 10px;
+  padding-left: 10px;
   color: #000;
 `;
 
 
 export const Register = styled.Text`
-  margin-top: 20;
+  margin-top: 20px;
   color: #000;
   font-family: Roboto-Bold;
-  font-size: 18;
-  letter-spacing: 1;
+  font-size: 18px;
+  letter-spacing: 1px;
 `;
 
 export const Button = styled.TouchableOpacity`
-  height: 51;
-  width: 50;
+  height: 51px;
+  width: 50px;
   justify-content: center;
   align-items: center;
-  background-color: #7915c1;
-  margin-top: 10;
-  border-radius: 50;
-  margin-top: 20;
+  background-color: ${colors.primary};
+  margin-top: 10px;
+  border-radius: 50px;
+  margin-top: 20px;
 `;
 
 export const TextButton = styled.Text`
   font-family: Roboto-Bold;
-  font-size: 18;
+  font-size: 18px;
   color: #fff;
-  letter-spacing: 0.1;
+  letter-spacing: 0.1px;
 `;
 
 export const TextRecover = styled.Text`
   margin-top: 10%;
   color: #000;
   font-family: Roboto-Bold;
-  font-size: 18;
-  letter-spacing: 1;
+  font-size: 18px;
+  letter-spacing: 1px;
 `;
 export const Text = styled.Text`
   margin-top: 2%;
   color: #000;
   font-family: Roboto-Bold;
-  font-size: 14;
-  letter-spacing: 2;
+  font-size: 14px;
+  letter-spacing: 2px;
   opacity: 0.5;
 `;

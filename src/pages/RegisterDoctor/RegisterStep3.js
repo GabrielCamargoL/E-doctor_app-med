@@ -2,13 +2,14 @@ import React, { useState, useEffect } from 'react';
 
 import {
   Container,
+  Row,
+  Col,
   SubTitle,
-  LabelContainer,
+  LabelInput,
   InputLabel,
-  HalfInputLabel,
-  SmallInputLabel,
   InputContainer,
-  Advance,
+  ButtonSend,
+  ButtonSendText,
   Circle,
   CheckedCircle,
   ButtonContainer,
@@ -23,7 +24,6 @@ import api from '../../services/api';
 export default function RegisterStep3({ navigation, route }) {
 
   let doctorInfo = route.params.doctorInfo;
-  console.log(doctorInfo)
 
   const [specialty, setSpecialty] = useState('');
   const [crm, setCrm] = useState('');
@@ -41,10 +41,12 @@ export default function RegisterStep3({ navigation, route }) {
 
   async function handleAdvance() {
     return navigation.navigate('RegisterStep4', {
-      doctorInfo,
-      clinicInfo: {
+      doctorInfo: {
+        ...doctorInfo,
         specialty,
         crm,
+      },
+      clinicInfo: {
         home_clinic,
         clinic_cep,
         clinic_street,
@@ -62,42 +64,36 @@ export default function RegisterStep3({ navigation, route }) {
       <Container>
         <SubTitle>Dados Profissionais</SubTitle>
 
-        <InputContainer>
-          <View style={{
-            backgroundColor: '#fff',
-            paddingHorizontal: 10,
-            top: 10,
-            left: 25,
-            zIndex: 50,
-            width: '33%',
-          }}>
-            <Text style={{ fontSize: 16 }}>Especialidade</Text>
-          </View>
-          <InputLabel
-            placeholder="Especialidade"
-            placeholderTextColor="#A8A8A8"
-            keyboardType="email-address"
-            value={specialty}
-            onChangeText={setSpecialty}
-          />
-        </InputContainer>
+        <Row>
+          <InputContainer>
+            <LabelInput style={{ fontSize: 16 }}>Especialidade</LabelInput>
+            <InputLabel
+              placeholder="Especialidade"
+              placeholderTextColor="#A8A8A8"
+              keyboardType="email-address"
+              value={specialty}
+              onChangeText={setSpecialty}
+            />
+          </InputContainer>
+        </Row>
 
-        <InputContainer>
-          <LabelContainer>
-            <Text style={{ fontSize: 16 }}> CRM </Text>
-          </LabelContainer>
-          <InputLabel
-            placeholder="CRM"
-            placeholderTextColor="#A8A8A8"
-            keyboardType="default"
-            value={crm}
-            onChangeText={setCrm}
-          />
-        </InputContainer>
+        <Row>
+          <InputContainer>
+            <LabelInput style={{ fontSize: 16 }}> CRM </LabelInput>
+            <InputLabel
+              placeholder="CRM"
+              placeholderTextColor="#A8A8A8"
+              keyboardType="default"
+              value={crm}
+              onChangeText={setCrm}
+            />
+          </InputContainer>
+        </Row>
 
         <SubTitle style={{ marginTop: 25 }}>Consultorio</SubTitle>
 
-        <Text style={{ fontSize: 16, marginLeft: 10 }}>Consultório Residencial?</Text>
+        <LabelInput style={{ fontSize: 16, marginLeft: 10 }}>Consultório Residencial?</LabelInput>
+
 
         <View style={{ flexDirection: 'row', alignSelf: 'flex-start', margin: 10 }}>
           {options.map(item => {
@@ -119,130 +115,97 @@ export default function RegisterStep3({ navigation, route }) {
           </>
           :
           <>
-            <InputContainer>
-              <LabelContainer>
-                <Text style={{ fontSize: 16 }}> CEP </Text>
-              </LabelContainer>
-              <InputLabel
-                placeholder="00000 000"
-                placeholderTextColor="#A8A8A8"
-                keyboardType="default"
-                value={clinic_cep}
-                onChangeText={setClinicCep}
-              />
-            </InputContainer>
-
-            <InputContainer>
-              <View style={{
-                backgroundColor: '#fff',
-                paddingHorizontal: 10,
-                top: 10,
-                left: 25,
-                zIndex: 50,
-                width: '33%',
-              }}>
-                <Text style={{ fontSize: 16 }}>Logradouro</Text>
-              </View>
-              <InputLabel
-                placeholder="Logradouro"
-                placeholderTextColor="#A8A8A8"
-                keyboardType="email-address"
-                value={clinic_street}
-                onChangeText={setClinicStreet}
-              />
-            </InputContainer>
-
-            <InputContainer>
-              <LabelContainer>
-                <Text style={{ fontSize: 16 }}> Bairro </Text>
-              </LabelContainer>
-              <InputLabel
-                placeholder="Bairro"
-                placeholderTextColor="#A8A8A8"
-                keyboardType="default"
-                value={clinic_neighborhood}
-                onChangeText={setClinicNeighborhood}
-              />
-            </InputContainer>
-
-            <View style={{ flexDirection: 'row', alignItems: 'center' }}>
+            <Row>
               <InputContainer>
-                <View style={{
-                  backgroundColor: '#fff',
-                  paddingHorizontal: 10,
-                  top: 10,
-                  left: 25,
-                  zIndex: 50,
-                  width: '50%',
-                }}>
-                  <Text style={{ fontSize: 16 }}>Número</Text>
-                </View>
-                <HalfInputLabel
-                  placeholder="Especialidade"
+                <LabelInput style={{ fontSize: 16 }}> CEP </LabelInput>
+                <InputLabel
+                  placeholder="00000 000"
                   placeholderTextColor="#A8A8A8"
-                  keyboardType="number-pad"
-                  value={clinic_number}
-                  onChangeText={setClinicNumber}
+                  keyboardType="default"
+                  value={clinic_cep}
+                  onChangeText={setClinicCep}
                 />
               </InputContainer>
+            </Row>
 
-              <CheckBox value={HouseWithoutNumber} onValueChange={setHouseWithoutNumber} />
-              <Text> Endereço sem Número</Text>
-            </View>
-
-            <InputContainer>
-              <View style={{
-                backgroundColor: '#fff',
-                paddingHorizontal: 10,
-                top: 10,
-                left: 25,
-                zIndex: 50,
-                width: '33%',
-              }}>
-                <Text style={{ fontSize: 16 }}>Complemento</Text>
-              </View>
-              <InputLabel
-                placeholder="Especialidade"
-                placeholderTextColor="#A8A8A8"
-                keyboardType="email-address"
-                value={clinic_complement}
-                onChangeText={setClinicComplement}
-              />
-            </InputContainer>
-
-            <View style={{ flexDirection: 'row', alignItems: 'flex-start' }}>
+            <Row>
               <InputContainer>
-                <View style={{
-                  backgroundColor: '#fff',
-                  paddingHorizontal: 10,
-                  top: 10,
-                  left: 25,
-                  zIndex: 50,
-                  width: '23%',
-                }}>
-                  <Text style={{ fontSize: 16 }}>UF</Text>
-                </View>
-                <SmallInputLabel
-                  placeholder="SP"
+                <LabelInput style={{ fontSize: 16 }}>Logradouro</LabelInput>
+                <InputLabel
+                  placeholder="Logradouro"
                   placeholderTextColor="#A8A8A8"
-                  keyboardType="number-pad"
-                  value={clinic_uf}
-                  onChangeText={setClinicUf}
+                  keyboardType="email-address"
+                  value={clinic_street}
+                  onChangeText={setClinicStreet}
                 />
               </InputContainer>
+            </Row>
+
+            <Row>
+              <InputContainer>
+                <LabelInput style={{ fontSize: 16 }}> Bairro </LabelInput>
+                <InputLabel
+                  placeholder="Bairro"
+                  placeholderTextColor="#A8A8A8"
+                  keyboardType="default"
+                  value={clinic_neighborhood}
+                  onChangeText={setClinicNeighborhood}
+                />
+              </InputContainer>
+            </Row>
+
+
+            <Row style={{ alignItems: 'center' }}>
+              <Col style={{ width: '48%' }}>
+                <InputContainer>
+                  <LabelInput style={{ fontSize: 16 }}>Número</LabelInput>
+                  <InputLabel
+                    placeholder="298"
+                    placeholderTextColor="#A8A8A8"
+                    keyboardType="number-pad"
+                    value={clinic_number}
+                    onChangeText={setClinicNumber}
+                  />
+                </InputContainer>
+              </Col>
+
+              <Col style={{ flexDirection: 'row' }}>
+                <CheckBox value={HouseWithoutNumber} onValueChange={setHouseWithoutNumber} />
+                <Text> Endereço sem Número</Text>
+              </Col>
+            </Row>
+
+
+            <Row>
+              <InputContainer>
+                <LabelInput style={{ fontSize: 16 }}>Complemento</LabelInput>
+                <InputLabel
+                  placeholder="Complemento"
+                  placeholderTextColor="#A8A8A8"
+                  keyboardType="email-address"
+                  value={clinic_complement}
+                  onChangeText={setClinicComplement}
+                />
+              </InputContainer>
+            </Row>
+
+            <Row>
+              <Col style={{ width: '20%' }}>
+                <InputContainer>
+                  <LabelInput style={{ fontSize: 16 }}>UF</LabelInput>
+                  <InputLabel
+                    placeholder="SP"
+                    placeholderTextColor="#A8A8A8"
+                    keyboardType="number-pad"
+                    value={clinic_uf}
+                    onChangeText={setClinicUf}
+                  />
+                </InputContainer>
+              </Col>
 
               <InputContainer>
-                <View style={{
-                  backgroundColor: '#fff',
-                  paddingHorizontal: 10,
-                  top: 10,
-                  left: 25,
-                  zIndex: 50,
-                  width: '50%',
-                }}>
-                  <Text style={{ fontSize: 16 }}>Cidade</Text>
-                </View>
-                <HalfInputLabel
+                <LabelInput style={{ fontSize: 16 }}>Cidade</LabelInput>
+                <InputLabel
                   placeholder="Cidade"
                   placeholderTextColor="#A8A8A8"
                   keyboardType="number-pad"
@@ -250,15 +213,15 @@ export default function RegisterStep3({ navigation, route }) {
                   onChangeText={setClinicCity}
                 />
               </InputContainer>
-            </View>
+            </Row>
           </>
         }
 
-        <TouchableOpacity onPress={handleAdvance}>
-          <View style={{ alignItems: 'center' }}>
-            <Advance>Avançar</Advance>
-          </View>
-        </TouchableOpacity>
+        <Row style={{ alignItems: 'center', justifyContent: 'center', marginBottom: 50 }}>
+          <ButtonSend onPress={() => handleAdvance()}>
+            <ButtonSendText>Avançar</ButtonSendText>
+          </ButtonSend>
+        </Row>
       </Container>
     </>
   )

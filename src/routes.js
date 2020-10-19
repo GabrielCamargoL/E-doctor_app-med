@@ -7,8 +7,9 @@ import { createDrawerNavigator } from '@react-navigation/drawer';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { createStackNavigator } from '@react-navigation/stack';
 
-import Home from './pages/Home';
 import Login from './pages/Login';
+import Home from './pages/Home';
+import Options from './pages/Options';
 
 import RegisterDoctor from './pages/RegisterDoctor';
 import RegisterStep2 from './pages/RegisterDoctor/RegisterStep2';
@@ -26,7 +27,7 @@ function BottomTab() {
     <Tab.Navigator>
       <Tab.Screen name="Home" component={Home} />
       <Tab.Screen name="Buscar" component={Home} />
-      <Tab.Screen name="Opções" component={Home} />
+      <Tab.Screen name="Opções" component={Options} />
     </Tab.Navigator>
   );
 }
@@ -56,7 +57,7 @@ export default function Routes() {
         component={RegisterStep3} 
       />
       <Stack.Screen 
-        options={{ title: 'Cadastro' }} 
+        options={{ headerShown: false }} 
         name="RegisterStep4" 
         component={RegisterStep4} 
       />

@@ -1,9 +1,10 @@
 const fonts = {
-  input: 16,
-  regular: 14,
-  medium: 12,
-  small: 11,
-  tiny: 10,
+  title:'19px',
+  input: '16px',
+  regular: '16px',
+  medium: '14px',
+  small: '12px',
+  tiny: '10px',
 };
 
 export default fonts;

@@ -71,8 +71,6 @@ export default function Login({ navigation }) {
 
   return (
     <>
-      <StatusBar backgroundColor="#7915c1" />
-
       {load ? (
         <>
           <ViewLoad>
