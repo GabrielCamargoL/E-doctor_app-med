@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import {BackHandler, AsyncStorage} from 'react-native';
 
 import {
   Container,
@@ -38,7 +39,10 @@ export default function Options({ navigation }) {
           <OptionsText>Ficha médica</OptionsText>
         </TouchableOptions>
 
-        <TouchableOptions onPress={() => {}}>
+        <TouchableOptions onPress={() => { 
+          AsyncStorage.clear()
+          BackHandler.exitApp() 
+        }}>
           <Icon type='FontAwesome' name='power-off'
             style={{marginRight:5, fontSize:22}}
           />

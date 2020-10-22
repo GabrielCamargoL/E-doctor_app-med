@@ -8,6 +8,7 @@ import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { createStackNavigator } from '@react-navigation/stack';
 
 import Login from './pages/Login';
+import ErrorLogin from './components/ErrorLogin';
 import Home from './pages/Home';
 import Options from './pages/Options';
 
@@ -40,6 +41,11 @@ export default function Routes() {
         options={{ headerShown: false }} 
         name="Login" 
         component={Login} 
+      />
+      <Stack.Screen 
+        options={{ headerShown: false }} 
+        name="ErrorLogin" 
+        component={ErrorLogin} 
       />
       <Stack.Screen 
         options={{ title: 'Cadastro' }} 

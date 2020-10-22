@@ -28,7 +28,7 @@ import {
 import api from '../../services/api';
 
 import Lottie from 'lottie-react-native';
-import loading from '../../assets/loading.json';
+import loadingHeart from '../../assets/loadingHeart.json';
 
 import logo from '../../assets/logo.png';
 
@@ -38,26 +38,33 @@ export default function Login({ navigation }) {
   const [load, setLoad] = useState(false);
 
   useEffect(() => {
+    verifyToken();
+  }, [navigation]);
+
+  async function verifyToken() {
+    const token = await AsyncStorage.getItem('token');
     
-  }, [email]);
+    if (token) {
+      navigation.replace('Home');
+    }
+  }
 
   async function handleLogin() {
-    // setLoad(true);
-    setInterval(() => 3000);
-    return navigation.navigate('Home')
+    setLoad(true);
     try {
-      const response = await api.post('/sessions', {
+      const response = await api.post('/doctorAuth/signIn', {
         email,
         password,
       });
       console.log(response.data);
       if (response.data) {
         await AsyncStorage.setItem('token', response.data.token.token);
-        await AsyncStorage.setItem('auth_id', response.data.user.id.toString());
-        await AsyncStorage.setItem('username', response.data.user.username);
-        await AsyncStorage.setItem('surname', response.data.user.surname);
-        await AsyncStorage.setItem('email', response.data.user.email);
-        navigation.replace('Home');
+        await AsyncStorage.setItem('auth_id', response.data.doctor.id.toString());
+        await AsyncStorage.setItem('username', response.data.doctor.username);
+        await AsyncStorage.setItem('surname', response.data.doctor.surname);
+        await AsyncStorage.setItem('email', response.data.doctor.email);
+
+        setTimeout(() => navigation.replace('Home'), 3000);
       } else {
         setLoad(false);
         navigation.navigate('ErrorLogin');
@@ -75,12 +82,12 @@ export default function Login({ navigation }) {
         <>
           <ViewLoad>
             <Lottie
-              source={loading}
-              style={{ width: '100%' }}
+              source={loadingHeart}
+              style={{ width: '80%' }}
               autoSize
               autoPlay
               loop={true}
-              resizeMode="contain"
+              resizeMode="cover"
             />
             <TextLoad>Carregando informações, aguarde...</TextLoad>
           </ViewLoad>

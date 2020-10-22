@@ -18,7 +18,7 @@ export const TextLoad = styled.Text`
   font-family: Roboto;
   font-style: normal;
   font-weight: normal;
-  font-size: 18px;
+  font-size: 20px;
   line-height: 21px;
   text-align: justify;
   margin-top: 20px;
