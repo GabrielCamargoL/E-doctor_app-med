@@ -26,8 +26,7 @@ const Tab = createBottomTabNavigator();
 function BottomTab() {
   return (
     <Tab.Navigator>
-      <Tab.Screen name="Home" component={Home} />
-      <Tab.Screen name="Buscar" component={Home} />
+      <Tab.Screen options={{ headerShown: false }}  name="Home" component={Home} />
       <Tab.Screen name="Opções" component={Options} />
     </Tab.Navigator>
   );
@@ -73,6 +72,7 @@ export default function Routes() {
         component={DetailsDoctor} 
       />
       <Stack.Screen 
+        options={{ headerShown: false }}
         name="Home" 
         component={BottomTab} 
       />

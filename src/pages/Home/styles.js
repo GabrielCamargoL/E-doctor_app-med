@@ -5,6 +5,7 @@ import {colors, fonts} from '../../styles';
 
 export const Container = styled.View`
   flex: 1;
+  margin-top:23px;
   background-color: #fff;
 `;
 
@@ -173,10 +174,11 @@ export const TextButton = styled.Text`
 `;
 
 export const TabMenu = styled.Text`
-  color: #000;
+  color: #FFF;
   text-transform: capitalize;
   font-family: Roboto-Bold;
-  font-size: 12;
+  font-size: 15px;
+  font-weight: bold;
 `;
 
 export const ButtonView = styled.View`
@@ -208,15 +210,31 @@ export const Logo = styled.Image`
   margin-bottom:20;
 `;
 
-export const HeaderText = styled.Text`
+export const PacientName = styled.Text`
   font-size: ${fonts.title};
-  padding: 30px;
-  text-align: center;
+  padding: 10px;
 `;
 
-export const Logo2 = styled.Image`
-  width: 75;
-  height: 75;
+export const HeaderText = styled.Text`
+  font-size: ${fonts.title};
+  padding: 10px;
+  text-align: center;
+  color:#9586A8;
+`;
+
+export const IconAppointment = styled.View`
+  width: 60;
+  height: 60;
+  border-radius: 100;
+  background-color:${colors.cyan};
+  justify-content: center;
+  align-items: center;
+`;
+
+export const IconAppointmentText = styled.Text`
+  font-size:14px;
+  font-weight:bold;
+  color:#fff;
 `;
 
 export const Row = styled.View`
