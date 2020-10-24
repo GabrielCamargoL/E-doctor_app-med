@@ -17,7 +17,7 @@ import RegisterStep2 from './pages/RegisterDoctor/RegisterStep2';
 import RegisterStep3 from './pages/RegisterDoctor/RegisterStep3';
 import RegisterStep4 from './pages/RegisterDoctor/RegisterStep4';
 
-import DetailsDoctor from './pages/DetailsDoctor';
+import AppointmentDetails from './pages/AppointmentDetails';
 
 const Stack = createStackNavigator();
 const Tab = createBottomTabNavigator();
@@ -68,8 +68,8 @@ export default function Routes() {
       />
       <Stack.Screen 
         options={{ headerShown: false }} 
-        name="DetailsDoctor" 
-        component={DetailsDoctor} 
+        name="AppointmentDetails" 
+        component={AppointmentDetails} 
       />
       <Stack.Screen 
         options={{ headerShown: false }}

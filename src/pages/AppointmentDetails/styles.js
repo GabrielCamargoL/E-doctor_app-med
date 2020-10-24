@@ -10,6 +10,23 @@ export const Container = styled.SafeAreaView`
   margin-bottom: 20px;
 `;
 
+export const ViewLoad = styled.View`
+  flex: 1;
+  justify-content: center;
+  align-items: center;
+`;
+
+export const TextLoad = styled.Text`
+  color: ${colors.primary};
+  font-family: Roboto;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 20px;
+  line-height: 21px;
+  text-align: justify;
+  margin-top: 20px;
+`;
+
 export const ViewLogo = styled.View`
   height: 65px;
   width: 65px;
@@ -26,40 +43,49 @@ export const SectionCompanyData = styled.View`
   width: 100%;
   flex-direction: row;
   align-items: center;
-  padding: 20px
+  padding: 20px;
 `;
 
 export const CompanyRate = styled.Text`
-  font-size: 12;
+  font-size: 12px;
   color: ${colors.primary};
   font-family: Roboto-Bold;
 `;
 
+export const DateAppointmentText = styled.Text`
+  color: ${colors.light};
+  font-size: 16px;
+  font-family: Roboto;
+`;
+
 export const HeaderText = styled.Text`
+  align-self: flex-start;
   color: #000;
   font-size: 22px;
   font-family: Roboto-Bold;
 `;
 
-export const DetailsText = styled.Text`
+export const SubtitleText = styled.Text`
   color: #000;
+  font-size: 18px;
+  font-family: Roboto-Bold;
+`;
+
+export const DetailsText = styled.Text`
+  color: ${colors.light};
   font-size: 16px;
   font-family: Roboto;
-  margin-left: 20
+  margin: 10px;
 `;
 
 export const Row = styled.View`
   width: 100%;
+  margin:10px;
   flex-direction: row;
-  align-items: center;
-  justify-content: center;
-  margin-top: 15px;
 `;
 
 export const Col = styled.View`
   flex-direction: column;
-  align-items: center;
-  justify-content: center;
 `;
 
 export const Button = styled.TouchableOpacity`
@@ -69,7 +95,7 @@ export const Button = styled.TouchableOpacity`
   justify-content: center;
   align-items: center;
   border-radius: 5px;
-  margin-top: 30px
+  margin-top: 30px;
 `;
 
 export const FlatButton = styled.TouchableOpacity`

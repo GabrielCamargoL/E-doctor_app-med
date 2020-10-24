@@ -3,20 +3,18 @@ import Icon from 'react-native-vector-icons/dist/FontAwesome';
 import IconAnt from 'react-native-vector-icons/dist/AntDesign';
 
 export const HeaderLogo = styled.Image`
-  height: 65px;
-  width: 65px;
-  border-radius: 10px;
+  height: 100%;
+  width: 100%;
+  border-radius: 200px;
 `;
 
 export const ViewLogo = styled.View`
-  height: 65px;
-  width: 65px;
-  border-radius: 10px;
+  height: 70%;
+  width: 40%;
+  border-radius: 200px;
   background: #f1f1f1;
-  position: absolute;
   justify-content: center;
   align-self: center;
-  top: 80px;
 `;
 
 export const HeaderContainer = styled.View`
@@ -43,10 +41,11 @@ export const Header = styled.ImageBackground.attrs({})`
   width: 100%;
   height: ${props => (props.large ? '236px' : '133px')};
   background-color: #c8c8c8;
-  justify-content: flex-end;
+  justify-content: center;
   align-items: center;
   z-index: 9999;
   margin-bottom: 20px;
+  margin-top: 20px;
 `;
 
 export const GoBackIcon = styled(IconAnt).attrs({

@@ -1,7 +1,11 @@
 /* eslint-disable eqeqeq */
-import React, {useState, useEffect} from 'react';
+import React, { useState, useEffect } from 'react';
+import LinearGradient from 'react-native-linear-gradient';
+import {StyleSheet} from 'react-native';
 
 import api from '../../services/api';
+
+import {colors, fonts} from '../../styles';
 import {
   HeaderContainer,
   ViewLogo,
@@ -12,7 +16,7 @@ import {
   FavoriteIcon,
 } from './styles';
 
-import logo from '../../assets/logo.png';
+import Avatar from '../../assets/Avatar.png';
 
 const HeaderCheckout = ({
   children,
@@ -36,27 +40,38 @@ const HeaderCheckout = ({
           <HeaderClosed>Fechado</HeaderClosed>
         </HeaderContainer>
       )} */}
-
+      
 
       <ViewLogo elevation={8}>
-        <HeaderLogo source={logo} />
+        <HeaderLogo source={Avatar} />
       </ViewLogo>
     </>
   );
 
-
-    // return (
-    //   <Header source={logo} large={large}>
-    //     <Content />
-    //   </Header>
-    // );
-
-    return (
-      <Header large={large}>
+  return (
+    <LinearGradient
+      colors={['purple', colors.primary_40]}
+      style={styles.container}
+      start={{ x: 0.5, y: 0.7 }}
+      end={{ x: 0.5, y: 0 }}
+    >
         <Content />
-      </Header>
-    );
+    </LinearGradient>
+  );
 
 };
+
+const styles = StyleSheet.create({
+  container: {
+    position: 'relative',
+    width: '100%',
+    height: 236,
+    justifyContent: 'center',
+    alignItems: 'center',
+    zIndex: 9999,
+    marginBottom: 20,
+    marginTop: 20,
+  },
+})
 
 export default HeaderCheckout;

@@ -1,5 +1,6 @@
 import React, {useState, useEffect} from 'react';
 import moment from 'moment';
+// import 'moment/min/locales';
 import {ScrollView, Text} from 'react-native';
 
 
