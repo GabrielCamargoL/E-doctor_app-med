@@ -36,6 +36,7 @@ import logo from '../../assets/logo.png';
 export default function Home({ navigation }) {
   const [confirmedAppointments, setConfirmedAppointments] = useState([]);
   const [pendingAppointments, setPendingAppointments] = useState([]);
+  const [reload, setReload] = useState(0);
 
   const [items, setItems] = useState({});
 
@@ -45,13 +46,10 @@ export default function Home({ navigation }) {
 
       const responseConfirmed = await api.get(`appointment/confirmedAppointments/${doctor_id}`);
       setConfirmedAppointments(responseConfirmed.data)
-
-      const responsePending = await api.get(`appointment/pendingAppointments/${doctor_id}`);
-      setPendingAppointments(responsePending.data)
     }
 
     getAppointments();
-  }, []);
+  }, [reload]);
 
   function handleNavigateToApointmentDetals(appointment_id) {
     navigation.navigate('AppointmentDetails', {
@@ -72,7 +70,7 @@ export default function Home({ navigation }) {
       return Date.parse(date) === Date.parse(moment(day.timestamp).format("l"));
     })
 
-    let ArrayHelp = []
+    let ArrayHelp = [];
     var obj = {};
 
     for (var consulta of (pivot)) {
@@ -87,6 +85,7 @@ export default function Home({ navigation }) {
     obj[selectedDay] = ArrayHelp;
 
     setItems(obj)
+    console.log(obj)
   }
 
 
@@ -121,7 +120,8 @@ export default function Home({ navigation }) {
     <>
       <StatusBar backgroundColor="#7915c1" />
       <Container>
-        <Tabs>
+        <Tabs onChangeTab={() => {setReload(reload + 1)}}>
+
           <Tab
             heading={
               <TabHeading style={styles.tabHeading}>
@@ -136,6 +136,7 @@ export default function Home({ navigation }) {
               renderItem={renderItem}
             />
           </Tab>
+
           <Tab
             style={styles.tabs}
             heading={
@@ -146,10 +147,9 @@ export default function Home({ navigation }) {
             <AppointmentPendingCard
               key={pendingAppointments.id}
               navigation={navigation}
-              appointmentData={pendingAppointments}
             />
-
           </Tab>
+
         </Tabs>
       </Container>
     </>

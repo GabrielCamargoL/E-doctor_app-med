@@ -35,11 +35,11 @@ import logo from '../../assets/logo.png';
 export default function Login({ navigation }) {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
-  const [load, setLoad] = useState(true);
+  const [load, setLoad] = useState(false);
 
   useEffect(() => {
     verifyToken();
-  }, [navigation]);
+  }, []);
 
   async function verifyToken() {
     const token = await AsyncStorage.getItem('token');

@@ -58,6 +58,18 @@ export const DateAppointmentText = styled.Text`
   font-family: Roboto;
 `;
 
+export const UnscheduleText = styled.Text`
+  color: ${colors.danger};
+  font-size: 16px;
+  font-weight: 700;
+`;
+
+export const FinalizeText = styled.Text`
+  color: ${colors.cyan};
+  font-size: 16px;
+  font-weight: 700;
+`;
+
 export const HeaderText = styled.Text`
   align-self: flex-start;
   color: #000;
@@ -79,7 +91,7 @@ export const DetailsText = styled.Text`
 `;
 
 export const Row = styled.View`
-  width: 100%;
+  width: 93%;
   margin:10px;
   flex-direction: row;
 `;
@@ -121,4 +133,65 @@ export const FlatButtonText = styled.Text`
   font-weight: bold;
   font-family: Roboto-Bold;
   text-transform: capitalize;
+`;
+
+
+export const ModalContainer = styled.SafeAreaView`
+  flex: 1;
+  position: relative;
+  background-color: #fff;
+  margin-bottom: 20px;
+  min-height:100%;
+`;
+
+export const CancelingButton = styled.TouchableOpacity`
+  width:60%;
+  height:50px;
+  background-color: ${colors.danger};
+  justify-content: center;
+  align-items: center;
+  align-self: center;
+  border-radius: 10px;
+  margin-top: 30px;
+`;
+
+export const FinalizeButton = styled.TouchableOpacity`
+  width:60%;
+  height:50px;
+  background-color: ${colors.success};
+  justify-content: center;
+  align-items: center;
+  align-self: center;
+  border-radius: 10px;
+  margin-top: 30px;
+`;
+
+export const Circle = styled.TouchableOpacity`
+    height: 20px;
+    width: 20px;
+    border-radius: 10;
+    border-width: 1px;
+    border-color: #ACACAC;
+    align-items: center;
+    justify-content: center;
+    margin-right:7px;
+`;
+
+export const CheckedCircle = styled.TouchableOpacity`
+    width: 14px;
+    height: 14px;
+    border-radius: 10px;
+    background-color: #4B7299;
+`;
+
+export const ButtonContainer = styled.View`
+    flex-direction: row;
+    justify-content: flex-start;
+    margin-bottom:5px;
+    margin-left:8px;
+`;
+
+export const LabelMedicine = styled.Text`
+  font-size: 16px;
+  color: ${colors.light};
 `;
