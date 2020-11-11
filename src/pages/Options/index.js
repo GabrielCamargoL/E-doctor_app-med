@@ -23,6 +23,10 @@ export default function Options({ navigation }) {
           <OptionsText>Perfil</OptionsText>
         </TouchableOptions>
 
+        <TouchableOptions onPress={() => navigation.navigate('Doubt')}>
+          <OptionsText>Dúvidas</OptionsText>
+        </TouchableOptions>
+
         <TouchableOptions onPress={() => {}}>
           <OptionsText>Prescrição</OptionsText>
         </TouchableOptions>
