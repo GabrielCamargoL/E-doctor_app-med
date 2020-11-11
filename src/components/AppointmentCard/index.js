@@ -1,6 +1,7 @@
 import React, {useState, useEffect} from 'react';
-
+import moment from 'moment';
 import {ScrollView, Text} from 'react-native';
+
 
 import api from '../../services/api';
 
@@ -18,20 +19,24 @@ import Icon from 'react-native-vector-icons/dist/FontAwesome';
 import logo from '../../assets/logo.png';
 
 
-const DoctorCard = ({doctorId, doctorData, navigation})  => {
+const AppointmentCard = ({appointmentData, navigation})  => {
 
   const goDetailsDoctor = () => {
-    console.log('tester');
     navigation.navigate('DetailsDoctor');
   };
+
+  useEffect(() => {
+    moment.locale('pt-BR')
+  }, [])
+  
 
   return (
     <>
     <Container
       elevation={8}>
-      {doctorData.map(doctor => (
+      {appointmentData.map((appointment, index) => (
         <Card
-          key={doctor.id}
+          key={appointment.id}
           onPress={goDetailsDoctor}>
 
           <IconCard>
@@ -39,8 +44,10 @@ const DoctorCard = ({doctorId, doctorData, navigation})  => {
           </IconCard>
 
           <Data>
-            <NameLabel>{doctor.name}</NameLabel>
-            <SpecialtyLabel>{doctor.cargo}</SpecialtyLabel>
+            <NameLabel>{appointment.user.username} {appointment.user.surname}</NameLabel>
+            <SpecialtyLabel>
+              {moment(appointment.consultation_schedule).format('lll')}
+            </SpecialtyLabel>
           </Data>
         </Card>
       ))}
@@ -49,4 +56,4 @@ const DoctorCard = ({doctorId, doctorData, navigation})  => {
   );
 };
 
-export default DoctorCard;
+export default AppointmentCard;
