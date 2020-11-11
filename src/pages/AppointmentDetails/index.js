@@ -378,111 +378,105 @@ export default function DetailsDoctor({ navigation, route }) {
       {/* modal de Finalização da consulta */}
       <Modalize ref={modalFinalize}>
         <ModalContainer>
-          <ImageBackground
-            source={image}
-            imageStyle={{ opacity: 0.2 }}
-            style={{ height: '100%', width: '100%', backgroundAttachment: 'fixed' }}
+          <HeaderText
+            style={{ alignSelf: 'center', marginTop: 20, marginBottom: 20 }}
           >
-            <HeaderText
-              style={{ alignSelf: 'center', marginTop: 20, marginBottom: 20 }}
-            >
-              Finalizando Consulta
+            Finalizando Consulta
             </HeaderText>
 
-            <Row style={{ borderBottomColor: `${colors.light}`, borderBottomWidth: 2 }}>
-              <Col>
-                <HeaderText style={{ marginBottom: 15 }}>Prescrição médica</HeaderText>
-              </Col>
-            </Row>
+          <Row style={{ borderBottomColor: `${colors.light}`, borderBottomWidth: 2 }}>
+            <Col>
+              <HeaderText style={{ marginBottom: 15 }}>Prescrição médica</HeaderText>
+            </Col>
+          </Row>
 
+          <Row>
+            <LabelMedicine>Nome:</LabelMedicine>
+            <TextInput
+              placeholder='amoxilina'
+              keyboardType="default"
+              value={medicine}
+              onChangeText={setMedicine}
+              style={{
+                borderBottomWidth: 1, borderRadius: 10, borderColor: `${colors.light}`,
+                backgroundColor: '#fff',
+                height: 37, width: '70%',
+                marginTop: -5, marginLeft: 5
+              }}
+            />
+          </Row>
+
+          <Row>
+            <LabelMedicine>Quantidade:</LabelMedicine>
+
+            <TextInput
+              placeholder='300'
+              keyboardType="default"
+              value={quantity}
+              onChangeText={setQuantity}
+              style={{
+                borderBottomWidth: 2, borderRadius: 10, borderColor: `${colors.light}`,
+                backgroundColor: '#fff',
+                height: 37, width: '15%',
+                marginTop: -5, marginLeft: 5
+              }}
+            />
+
+            <View style={{ borderBottomWidth: 2, borderColor: `${colors.light}`, marginLeft: 15 }}>
+              <Picker
+                mode="dropdown"
+                selectedValue={unit}
+                style={{ height: 30, width: 150 }}
+                onValueChange={(itemValue, itemIndex) =>
+                  setUnit(itemValue)
+                }>
+                <Picker.Item label="Selecione" value={null} />
+                <Picker.Item label="gramas(g)" value="gramas(g)" />
+                <Picker.Item label="miligramas(mg)" value="miligramas(mg)" />
+                <Picker.Item label="mililitros(ml)" value="mililitros(ml)" />
+                <Picker.Item label="comprimidos" value="comprimidos" />
+              </Picker>
+            </View>
+          </Row>
+
+          <Row>
+            <LabelMedicine>Periodo</LabelMedicine>
+          </Row>
+
+          <Row>
+            <Col>
+              {period_options.map(item => {
+                return (
+                  <ButtonContainer>
+                    <Circle onPress={() => setPeriodType(item.key)}>
+                      {period_type === item.key && (<CheckedCircle />)}
+                    </Circle>
+
+                    <Text>{item.value}</Text>
+                  </ButtonContainer>
+                )
+              })}
+            </Col>
+          </Row>
+
+          <TouchableOpacity onPress={() => { }}>
             <Row>
-              <LabelMedicine>Nome:</LabelMedicine>
-              <TextInput
-                placeholder='amoxilina'
-                keyboardType="default"
-                value={medicine}
-                onChangeText={setMedicine}
-                style={{
-                  borderBottomWidth: 1, borderRadius: 10, borderColor: `${colors.light}`,
-                  backgroundColor: '#fff',
-                  height: 37, width: '70%',
-                  marginTop: -5, marginLeft: 5
-                }}
+              <Icon type='FontAwesome' name='plus'
+                style={{ marginRight: 5, fontSize: 22 }}
               />
+              <SubtitleText>Adicionar medicamento</SubtitleText>
             </Row>
+          </TouchableOpacity>
 
-            <Row>
-              <LabelMedicine>Quantidade:</LabelMedicine>
-
-              <TextInput
-                placeholder='300'
-                keyboardType="default"
-                value={quantity}
-                onChangeText={setQuantity}
-                style={{
-                  borderBottomWidth: 2, borderRadius: 10, borderColor: `${colors.light}`,
-                  backgroundColor: '#fff',
-                  height: 37, width: '15%',
-                  marginTop: -5, marginLeft: 5
-                }}
-              />
-
-              <View style={{ borderBottomWidth: 2, borderColor: `${colors.light}`, marginLeft: 15 }}>
-                <Picker
-                  mode="dropdown"
-                  selectedValue={unit}
-                  style={{ height: 30, width: 150 }}
-                  onValueChange={(itemValue, itemIndex) =>
-                    setUnit(itemValue)
-                  }>
-                  <Picker.Item label="Selecione" value={null} />
-                  <Picker.Item label="gramas(g)" value="gramas(g)" />
-                  <Picker.Item label="miligramas(mg)" value="miligramas(mg)" />
-                  <Picker.Item label="mililitros(ml)" value="mililitros(ml)" />
-                  <Picker.Item label="comprimidos" value="comprimidos" />
-                </Picker>
-              </View>
-            </Row>
-
-            <Row>
-              <LabelMedicine>Periodo</LabelMedicine>
-            </Row>
-
-            <Row>
-              <Col>
-                {period_options.map(item => {
-                  return (
-                    <ButtonContainer>
-                      <Circle onPress={() => setPeriodType(item.key)}>
-                        {period_type === item.key && (<CheckedCircle />)}
-                      </Circle>
-
-                      <Text>{item.value}</Text>
-                    </ButtonContainer>
-                  )
-                })}
-              </Col>
-            </Row>
-
-            <TouchableOpacity onPress={() => { }}>
-              <Row>
-                <Icon type='FontAwesome' name='plus'
-                  style={{ marginRight: 5, fontSize: 22 }}
-                />
-                <SubtitleText>Adicionar medicamento</SubtitleText>
-              </Row>
-            </TouchableOpacity>
-
-            <Row>
-              <Text style={{ color: `${colors.light}`, fontWeight: 'bold' }}>
-                Obs: Confira todos os dados inseridos antes de concluir a consulta.
+          <Row>
+            <Text style={{ color: `${colors.light}`, fontWeight: 'bold' }}>
+              Obs: Confira todos os dados inseridos antes de concluir a consulta.
               </Text>
-            </Row>
+          </Row>
 
-            <FinalizeButton onPress={() => finalizeAppointment(appointment.id)}>
-              <Text style={{ color: '#fff', fontSize: 15 }}>Concluir consulta</Text>
-            </FinalizeButton>
-          </ImageBackground>
+          <FinalizeButton onPress={() => finalizeAppointment(appointment.id)}>
+            <Text style={{ color: '#fff', fontSize: 15 }}>Concluir consulta</Text>
+          </FinalizeButton>
         </ModalContainer>
       </Modalize>
     </>
