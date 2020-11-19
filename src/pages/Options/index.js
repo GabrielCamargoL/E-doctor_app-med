@@ -19,8 +19,8 @@ export default function Options({ navigation }) {
   return(
     <>
       <Container>
-        <TouchableOptions onPress={() => {}}>
-          <OptionsText>Perfil</OptionsText>
+        <TouchableOptions onPress={() => {navigation.navigate('MyProfile')}}>
+          <OptionsText>Meu Perfil</OptionsText>
         </TouchableOptions>
 
         <TouchableOptions onPress={() => navigation.navigate('Doubt')}>
@@ -28,19 +28,7 @@ export default function Options({ navigation }) {
         </TouchableOptions>
 
         <TouchableOptions onPress={() => {}}>
-          <OptionsText>Prescrição</OptionsText>
-        </TouchableOptions>
-
-        <TouchableOptions onPress={() => {}}>
-          <OptionsText>Dependentes</OptionsText>
-        </TouchableOptions>
-
-        <TouchableOptions onPress={() => {}}>
-          <OptionsText>Minha Agenda</OptionsText>
-        </TouchableOptions>
-
-        <TouchableOptions onPress={() => {}}>
-          <OptionsText>Ficha médica</OptionsText>
+          <OptionsText>Minha agenda</OptionsText>
         </TouchableOptions>
 
         <TouchableOptions onPress={() => { 
@@ -48,7 +36,7 @@ export default function Options({ navigation }) {
           BackHandler.exitApp() 
         }}>
           <Icon type='FontAwesome' name='power-off'
-            style={{marginRight:5, fontSize:22}}
+            style={{marginRight:5, fontSize:22, color:'#7915c1'}}
           />
           <OptionsText>Sair</OptionsText>
         </TouchableOptions>

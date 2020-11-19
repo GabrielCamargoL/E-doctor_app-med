@@ -12,7 +12,6 @@ import { Icon } from 'native-base';
 import Login from './pages/Login';
 import ErrorLogin from './components/ErrorLogin';
 import Home from './pages/Home';
-import Options from './pages/Options';
 
 import RegisterDoctor from './pages/RegisterDoctor';
 import RegisterStep2 from './pages/RegisterDoctor/RegisterStep2';
@@ -21,6 +20,9 @@ import RegisterStep4 from './pages/RegisterDoctor/RegisterStep4';
 
 import AppointmentDetails from './pages/AppointmentDetails';
 
+import Options from './pages/Options';
+
+import MyProfile from './pages/MyProfile';
 import Doubt from './pages/Doubt';
 
 const Stack = createStackNavigator();
@@ -93,6 +95,11 @@ export default function Routes() {
         options={{ title: 'Dúvidas' }}
         name="Doubt"
         component={Doubt}
+      />
+      <Stack.Screen
+        options={{ title: 'Meu Perfil' }}
+        name="MyProfile"
+        component={MyProfile}
       />
       <Stack.Screen
         options={{ headerShown: false }}
