@@ -83,7 +83,7 @@ export default function RegisterStep4({ navigation, route }) {
           }
         })
 
-      if (registerClinic(responseDoctor.data.id)) { // posteriormente incluir o upload de foto
+      if (registerClinic(responseDoctor.data.id) && uploadPhoto(responseDoctor.data.id)) {
         return setSuccess(true)
       }
 
@@ -117,23 +117,15 @@ export default function RegisterStep4({ navigation, route }) {
   }
 
   async function uploadPhoto(id) {
-    const formData = new FormData();
+    try {
+      const formData = new FormData();
       formData.append('image', {
-        name: 'olar.jpg',
         uri: photo.path,
-        type: 'image/jpeg'
+        type: photo.mime,
+        name: `${Date.now()}`,
       });
 
-    const response = await api.post(`/doctorAuth/uploadPhoto/${id}`, {formData} , {
-      headers: {
-        'content-type': 'multipart/form-data',
-        accept: 'multipart/form-data'
-      }
-    }).then((res) => {
-      console.log(res.data);
-      return res.data;
-    }).catch(errors => console.log(errors))
-    try {
+      const response = await api.post(`/doctorAuth/uploadPhoto/${id}`, formData)
 
       console.log(response)
 

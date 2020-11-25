@@ -13,6 +13,7 @@ export const OptionsText = styled.Text`
   font-family:Roboto;
   font-weight:700;
   font-size:${fonts.regular};
+  color: ${colors.primary};
 `;
 
 export const TouchableOptions = styled.TouchableOpacity`
