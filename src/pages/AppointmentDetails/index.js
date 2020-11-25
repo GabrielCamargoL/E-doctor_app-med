@@ -167,8 +167,11 @@ export default function DetailsDoctor({ navigation, route }) {
             text: "Sim",
             onPress: () => {
               alert('finalizado kk')
-              // api.put(`appointment/done/${id}`)
-              //   .then()
+              api.put(`appointment/done/${id}`)
+                .then(response => {
+                  alert('Consulta cancelada com sucesso.')
+                  navigation.navigate('Home')
+                })
             },
           },
           { text: "Não", onPress: () => { }, style: "cancel" }
