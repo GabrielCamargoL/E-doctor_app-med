@@ -1,8 +1,12 @@
 import React, { useState, useEffect } from 'react';
-import { View, StyleSheet, StatusBar, AsyncStorage, ScrollView, TouchableOpacity } from 'react-native';
-import { Tabs, TabHeading, Tab } from 'native-base';
+import { View, StyleSheet, StatusBar, AsyncStorage, ScrollView, TouchableOpacity, RefreshControl } from 'react-native';
+
+import { useIsDrawerOpen } from '@react-navigation/drawer';
+
 import moment from 'moment';
 import tz from 'moment-timezone';
+
+import { Tabs, TabHeading, Tab } from 'native-base';
 
 import { Agenda, LocaleConfig } from 'react-native-calendars';
 LocaleConfig.locales['pt-br'] = {
@@ -27,13 +31,19 @@ import {
   IconAppointmentText,
   Button2,
   ButtonText,
+  ViewIcon,
+  ViewGoBackIcon,
+  GoBackIcon
 } from './styles';
+
+import {colors, fonts} from '../../styles';
 
 import AppointmentPendingCard from '../../components/AppointmentPendingCard';
 import api from '../../services/api';
 import logo from '../../assets/logo.png';
 
 export default function Home({ navigation }) {
+  const [refreshing, setRefreshing] = React.useState(false);
   const [confirmedAppointments, setConfirmedAppointments] = useState([]);
   const [pendingAppointments, setPendingAppointments] = useState([]);
   const [reload, setReload] = useState(0);
@@ -41,21 +51,27 @@ export default function Home({ navigation }) {
   const [items, setItems] = useState({});
 
   useEffect(() => {
-    async function getAppointments() {
-      const doctor_id = await AsyncStorage.getItem('auth_id');
-
-      const responseConfirmed = await api.get(`appointment/confirmedAppointments/${doctor_id}`);
-      setConfirmedAppointments(responseConfirmed.data)
-    }
-
     getAppointments();
   }, [reload]);
+
+  async function getAppointments() {
+    const doctor_id = await AsyncStorage.getItem('auth_id');
+
+    const responseConfirmed = await api.get(`appointment/confirmedAppointments/${doctor_id}`);
+    setConfirmedAppointments(responseConfirmed.data)
+  }
 
   function handleNavigateToApointmentDetals(appointment_id) {
     navigation.navigate('AppointmentDetails', {
       appointment_id: appointment_id
     })
   }
+
+  const onRefresh = React.useCallback(() => {
+    setRefreshing(true);
+    getAppointments()
+    setRefreshing(false);
+  }, []);
 
 
   const loadItems = async (day) => {
@@ -92,7 +108,7 @@ export default function Home({ navigation }) {
   const renderItem = (item) => {
     return (
       <TouchableOpacity
-        onPress={ () => { handleNavigateToApointmentDetals(item.appointment_id) } }
+        onPress={() => { handleNavigateToApointmentDetals(item.appointment_id) }}
         style={{ marginTop: 17, marginRight: 10 }}>
         <Container>
           <View style={{ flexDirection: 'row', justifyContent: "space-evenly", alignItems: 'center' }}>
@@ -119,16 +135,32 @@ export default function Home({ navigation }) {
   return (
     <>
       <StatusBar backgroundColor="#7915c1" />
-      <Container>
-        <Tabs onChangeTab={() => {setReload(reload + 1)}}>
+      <Container refreshControl={
+          <RefreshControl refreshing={refreshing} onRefresh={onRefresh} />
+        }>
+
+        <ViewGoBackIcon onPress={() => navigation.openDrawer()}>
+          <GoBackIcon />
+        </ViewGoBackIcon>
+
+        <Tabs
+          onChangeTab={() => {
+            onRefresh()
+            setReload(reload + 1)
+          }}
+          tabContainerStyle={styles.tab}
+          tabBarUnderlineStyle={{backgroundColor: 'transparent'}}
+          >
 
           <Tab
-            heading={
-              <TabHeading style={styles.tabHeading}>
-                <TabMenu>Agenda</TabMenu>
-              </TabHeading>
-            }>
-            <HeaderText>Consultas marcadas</HeaderText>
+            heading="Agenda"
+            style={{backgroundColor:'#f1f1f1'}}
+            tabStyle={styles.tabHeadingLeft}
+            textStyle={{color: '#111'}}
+            activeTabStyle={styles.tabHeadingActiveLeft}
+            activeTextStyle={styles.tabHeadingActiveLeft}
+          >
+            <HeaderText style={{backgroundColor:'#FFF'}}>Consultas marcadas</HeaderText>
             <Agenda
               items={items}
               loadItemsForMonth={loadItems}
@@ -138,12 +170,12 @@ export default function Home({ navigation }) {
           </Tab>
 
           <Tab
-            style={styles.tabs}
-            heading={
-              <TabHeading style={styles.tabHeading}>
-                <TabMenu>Solicitações</TabMenu>
-              </TabHeading>
-            }>
+            heading="Solicitações"
+            style={{backgroundColor:'#f1f1f1'}}
+            tabStyle={styles.tabHeadingRigth}
+            textStyle={{color: '#111'}}
+            activeTabStyle={styles.tabHeadingActiveRigth}
+            activeTextStyle={styles.tabHeadingActiveRigth}>
             <AppointmentPendingCard
               key={pendingAppointments.id}
               navigation={navigation}
@@ -158,14 +190,35 @@ export default function Home({ navigation }) {
 
 
 const styles = StyleSheet.create({
-  tabHeading: {
-    backgroundColor: '#7915c1',
-    borderBottomWidth: 3,
-    borderBottomColor: '#7915c1',
+  tab: {
+    backgroundColor: 'transparent',
+    alignSelf : 'center',
+    marginTop: 30,
+    marginLeft: 40,
+    width: '80%',
+    height : 40,
+    borderRadius: 50,
   },
-  emptyDate: {
-    height: 15,
-    flex: 1,
-    paddingTop: 30
+  tabHeadingActiveLeft: {
+    backgroundColor: `${colors.primary}`,
+    color: 'white',
+    borderTopLeftRadius: 50,
+    borderBottomLeftRadius: 50
+  },
+  tabHeadingActiveRigth: {
+    backgroundColor: `${colors.primary}`,
+    color: 'white',
+    borderTopRightRadius: 50,
+    borderBottomRightRadius: 50
+  },
+  tabHeadingLeft: {
+    backgroundColor: '#fff',
+    borderTopLeftRadius: 50,
+    borderBottomLeftRadius: 50
+  },
+  tabHeadingRigth: {
+    backgroundColor: '#fff',
+    borderTopRightRadius: 50,
+    borderBottomRightRadius: 50
   }
 });

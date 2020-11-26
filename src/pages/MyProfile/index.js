@@ -22,6 +22,9 @@ import { Modalize } from 'react-native-modalize';
 import api from '../../services/api';
 
 
+import HeaderCheckout from '../../components/HeaderCheckout';
+
+
 export default function MyProfile({ navigation }) {
   const [dropdownDoctor, setDropdownDoctor] = useState(false);
   const [dropdownAddress, setDropdownAddress] = useState(false);

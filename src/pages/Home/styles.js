@@ -1,11 +1,11 @@
 import styled from 'styled-components/native';
 import Icon from 'react-native-vector-icons/dist/FontAwesome';
-//import Lottie from 'lottie-react-native';
+import IconAnt from 'react-native-vector-icons/dist/AntDesign';
 import {colors, fonts} from '../../styles';
 
 export const Container = styled.View`
   flex: 1;
-  margin-top:23px;
+  margin-top:10px;
   background-color: #fff;
 `;
 
@@ -337,3 +337,27 @@ export const AcceptButtonText = styled.Text`
   text-align:center;
   color: #FFF;
 `;
+
+export const ViewIcon = styled.TouchableOpacity`
+  width: 40px;
+  height: 40px;
+  border-radius: 25px;
+  background-color: ${colors.primary};
+  align-items: center;
+  justify-content: center;
+  z-index: 9999;
+`;
+
+export const ViewGoBackIcon = styled(ViewIcon)`
+  position: absolute;
+  left: 10px;
+  top: 30px;
+`;
+
+export const GoBackIcon = styled(Icon).attrs({
+  color: '#fff',
+  size: 24,
+  resizeMode: 'contain',
+  type: 'AntDesign',
+  name: 'bars',
+})``;

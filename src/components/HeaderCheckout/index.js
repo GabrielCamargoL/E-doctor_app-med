@@ -19,12 +19,7 @@ import {
 import Avatar from '../../assets/Avatar.png';
 
 const HeaderCheckout = ({
-  children,
-  butchery,
-  showcase,
-  logo,
-  onGoBack,
-  large,
+  client
 }) => {
   const [isFavorite, setIsFavorite] = useState(false);
   const [listFavorites, setListFavorites] = useState([]);

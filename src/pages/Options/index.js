@@ -33,7 +33,6 @@ export default function Options({ navigation }) {
 
         <TouchableOptions onPress={() => { 
           AsyncStorage.clear()
-          BackHandler.exitApp() 
         }}>
           <Icon type='FontAwesome' name='power-off'
             style={{marginRight:5, fontSize:22, color:'#7915c1'}}

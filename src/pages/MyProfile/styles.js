@@ -4,6 +4,7 @@ import {colors, general, fonts} from '../../styles';
 export const Container = styled.ScrollView.attrs({
   paddingHorizontal: 20,
 })`
+  margin-top:25px;
   flex:1;
   background-color:${colors.background};
 `;
