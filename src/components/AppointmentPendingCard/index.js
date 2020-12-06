@@ -72,7 +72,7 @@ const AppointmentPendingCard = ({ navigation }) => {
 
   }
 
-  async function refuseAppointment(id, pacientName) {
+  async function refuseAppointment(id, pacientName, index) {
     try {
       Alert.alert(
         "Atenção",
@@ -132,7 +132,7 @@ const AppointmentPendingCard = ({ navigation }) => {
                         <AcceptButtonText>Aceitar</AcceptButtonText>
                       </AcceptButton>
 
-                      <RefuseButton onPress={() => refuseAppointment(appointment.id, `${appointment.user.username + " " + appointment.user.surname}`)}>
+                      <RefuseButton onPress={() => refuseAppointment(appointment.id, `${appointment.user.username + " " + appointment.user.surname}`, index)}>
                         <RefuseButtonText>Recusar</RefuseButtonText>
                       </RefuseButton>
                     </ButtonsView>

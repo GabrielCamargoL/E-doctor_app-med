@@ -75,6 +75,9 @@ export default function DetailsDoctor({ navigation, route }) {
   const [otherReason, setOtherReason] = useState('');
   const [medicine, setMedicine] = useState('');
   const [quantity, setQuantity] = useState('');
+  const [days, setDays] = useState('');
+  const [hours, setHours] = useState('');
+  const [minutes, setMinutes] = useState('');
   const [unit, setUnit] = useState('');
   const [period_type, setPeriodType] = useState('');
 
@@ -95,15 +98,15 @@ export default function DetailsDoctor({ navigation, route }) {
 
   const period_options = [
     {
-      key: 'horas exatas (às 10 horas)',
+      key: 'exact_hour',
       value: 'horas exatas (às 10 horas)'
     },
     {
-      key: 'intervalo (das 10 horas às 14 horas)',
+      key: 'interval',
       value: 'intervalo (das 10 horas às 14 horas)'
     },
     {
-      key: 'após algum evento (antes do almoço/janta/dormir)',
+      key: 'in_event',
       value: 'após algum evento (antes do almoço/janta/dormir)'
     }
   ]
@@ -159,6 +162,7 @@ export default function DetailsDoctor({ navigation, route }) {
 
   async function finalizeAppointment(id) {
     try {
+      let hours_formated = `${hours}:${minutes}:00`;
       Alert.alert(
         "Finalizar consulta",
         `Deseja realmente concluir a consulta com ${appointment.user.username} ${appointment.user.surname}?`,
@@ -166,10 +170,18 @@ export default function DetailsDoctor({ navigation, route }) {
           {
             text: "Sim",
             onPress: () => {
-              alert('finalizado kk')
-              api.put(`appointment/done/${id}`)
+              api.put(`appointment/done/${id}`, {
+                "medicines": [{ 
+                  name: medicine, 
+                  quantity,
+                  unit, 
+                  period_type, 
+                  hours: hours_formated,
+                  days
+                }]
+              })
                 .then(response => {
-                  alert('Consulta cancelada com sucesso.')
+                  alert('Consulta finalizada com sucesso.')
                   navigation.navigate('Home')
                 })
             },
@@ -462,19 +474,64 @@ export default function DetailsDoctor({ navigation, route }) {
             </Col>
           </Row>
 
-          <TouchableOpacity onPress={() => { }}>
-            <Row>
-              <Icon type='FontAwesome' name='plus'
-                style={{ marginRight: 5, fontSize: 22 }}
-              />
-              <SubtitleText>Adicionar medicamento</SubtitleText>
-            </Row>
-          </TouchableOpacity>
+          <Row>
+            <LabelMedicine>Horário do medicamento:</LabelMedicine>
+          </Row>
+
+          <Row>
+            <TextInput
+              placeholder='10'
+              keyboardType="default"
+              value={hours}
+              onChangeText={setHours}
+              style={{
+                borderBottomWidth: 2, borderRadius: 10, borderColor: `${colors.light}`,
+                backgroundColor: '#fff',
+                height: 37, width: '10%',
+                marginTop: -5, marginLeft: 5
+              }}
+            />
+
+            <LabelMedicine>:</LabelMedicine>
+
+            <TextInput
+              placeholder='00'
+              keyboardType="default"
+              value={minutes}
+              onChangeText={setMinutes}
+              style={{
+                borderBottomWidth: 2, borderRadius: 10, borderColor: `${colors.light}`,
+                backgroundColor: '#fff',
+                height: 37, width: '10%',
+                marginTop: -5, marginLeft: 5
+              }}
+            />
+
+            <LabelMedicine>h</LabelMedicine>
+
+          </Row>
+
+          <Row>
+            <LabelMedicine>Quantidade de Dias:</LabelMedicine>
+
+            <TextInput
+              placeholder='15'
+              keyboardType="default"
+              value={days}
+              onChangeText={setDays}
+              style={{
+                borderBottomWidth: 2, borderRadius: 10, borderColor: `${colors.light}`,
+                backgroundColor: '#fff',
+                height: 37, width: '15%',
+                marginTop: -5, marginLeft: 5
+              }}
+            />
+          </Row>
 
           <Row>
             <Text style={{ color: `${colors.light}`, fontWeight: 'bold' }}>
               Obs: Confira todos os dados inseridos antes de concluir a consulta.
-              </Text>
+            </Text>
           </Row>
 
           <FinalizeButton onPress={() => finalizeAppointment(appointment.id)}>

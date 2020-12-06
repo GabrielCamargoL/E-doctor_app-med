@@ -51,7 +51,9 @@ export default function Home({ navigation }) {
   const [items, setItems] = useState({});
 
   useEffect(() => {
-    getAppointments();
+    setRefreshing(true);
+    getAppointments()
+    setRefreshing(false);
   }, [reload]);
 
   async function getAppointments() {
