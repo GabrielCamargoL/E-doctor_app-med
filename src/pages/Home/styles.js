@@ -16,7 +16,7 @@ export const ViewLoad = styled.View`
 `;
 
 export const TextLoad = styled.Text`
-  color: #ff910f;
+  color: ${colors.primary};
   font-family: Roboto;
   font-style: normal;
   font-weight: normal;

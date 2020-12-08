@@ -41,8 +41,6 @@ import {
   ButtonText,
   FlatButtonText,
   CompanyRate,
-
-
   ModalContainer,
   CancelingButton,
   FinalizeButton,
@@ -147,7 +145,7 @@ export default function DetailsDoctor({ navigation, route }) {
                 reason: reason
               }).then((response) => {
                 alert('Consulta cancelada com sucesso.')
-                navigation.navigate('Home')
+                navigation.reset({ routes: [{ name: 'Home' }] });
               })
             },
           },
@@ -171,18 +169,18 @@ export default function DetailsDoctor({ navigation, route }) {
             text: "Sim",
             onPress: () => {
               api.put(`appointment/done/${id}`, {
-                "medicines": [{ 
-                  name: medicine, 
+                "medicines": [{
+                  name: medicine,
                   quantity,
-                  unit, 
-                  period_type, 
+                  unit,
+                  period_type,
                   hours: hours_formated,
                   days
                 }]
               })
                 .then(response => {
                   alert('Consulta finalizada com sucesso.')
-                  navigation.navigate('Home')
+                  navigation.reset({ routes: [{ name: 'Home' }] });
                 })
             },
           },
@@ -380,16 +378,6 @@ export default function DetailsDoctor({ navigation, route }) {
       </Modalize>
 
 
-
-
-
-
-
-
-
-
-
-
       {/* modal de Finalização da consulta */}
       <Modalize ref={modalFinalize}>
         <ModalContainer>
@@ -474,59 +462,64 @@ export default function DetailsDoctor({ navigation, route }) {
             </Col>
           </Row>
 
-          <Row>
-            <LabelMedicine>Horário do medicamento:</LabelMedicine>
-          </Row>
+          {period_type === 'exact_hour' ?
+            <>
+              <Row>
+                <LabelMedicine>Horário do medicamento:</LabelMedicine>
+              </Row>
 
-          <Row>
-            <TextInput
-              placeholder='10'
-              keyboardType="default"
-              value={hours}
-              onChangeText={setHours}
-              style={{
-                borderBottomWidth: 2, borderRadius: 10, borderColor: `${colors.light}`,
-                backgroundColor: '#fff',
-                height: 37, width: '10%',
-                marginTop: -5, marginLeft: 5
-              }}
-            />
+              <Row>
+                <TextInput
+                  placeholder='10'
+                  keyboardType="default"
+                  value={hours}
+                  onChangeText={setHours}
+                  style={{
+                    borderBottomWidth: 2, borderRadius: 10, borderColor: `${colors.light}`,
+                    backgroundColor: '#fff',
+                    height: 37, width: '10%',
+                    marginTop: -5, marginLeft: 5
+                  }}
+                />
 
-            <LabelMedicine>:</LabelMedicine>
+                <LabelMedicine>:</LabelMedicine>
 
-            <TextInput
-              placeholder='00'
-              keyboardType="default"
-              value={minutes}
-              onChangeText={setMinutes}
-              style={{
-                borderBottomWidth: 2, borderRadius: 10, borderColor: `${colors.light}`,
-                backgroundColor: '#fff',
-                height: 37, width: '10%',
-                marginTop: -5, marginLeft: 5
-              }}
-            />
+                <TextInput
+                  placeholder='00'
+                  keyboardType="default"
+                  value={minutes}
+                  onChangeText={setMinutes}
+                  style={{
+                    borderBottomWidth: 2, borderRadius: 10, borderColor: `${colors.light}`,
+                    backgroundColor: '#fff',
+                    height: 37, width: '10%',
+                    marginTop: -5, marginLeft: 5
+                  }}
+                />
 
-            <LabelMedicine>h</LabelMedicine>
+                <LabelMedicine>h</LabelMedicine>
 
-          </Row>
+              </Row>
 
-          <Row>
-            <LabelMedicine>Quantidade de Dias:</LabelMedicine>
+              <Row>
+                <LabelMedicine>Quantidade de Dias:</LabelMedicine>
 
-            <TextInput
-              placeholder='15'
-              keyboardType="default"
-              value={days}
-              onChangeText={setDays}
-              style={{
-                borderBottomWidth: 2, borderRadius: 10, borderColor: `${colors.light}`,
-                backgroundColor: '#fff',
-                height: 37, width: '15%',
-                marginTop: -5, marginLeft: 5
-              }}
-            />
-          </Row>
+                <TextInput
+                  placeholder='15'
+                  keyboardType="default"
+                  value={days}
+                  onChangeText={setDays}
+                  style={{
+                    borderBottomWidth: 2, borderRadius: 10, borderColor: `${colors.light}`,
+                    backgroundColor: '#fff',
+                    height: 37, width: '15%',
+                    marginTop: -5, marginLeft: 5
+                  }}
+                />
+              </Row>
+            </>
+            : null
+          }
 
           <Row>
             <Text style={{ color: `${colors.light}`, fontWeight: 'bold' }}>

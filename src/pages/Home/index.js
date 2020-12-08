@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { View, StyleSheet, StatusBar, AsyncStorage, ScrollView, TouchableOpacity, RefreshControl } from 'react-native';
+import { View, StyleSheet, StatusBar, AsyncStorage, ScrollView, TouchableOpacity, RefreshControl, BackHandler, Alert } from 'react-native';
 
 import { useIsDrawerOpen } from '@react-navigation/drawer';
 
