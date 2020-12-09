@@ -36,6 +36,7 @@ const AppointmentPendingCard = ({ navigation }) => {
 
       const responsePending = await api.get(`appointment/pendingAppointments/${doctor_id}`);
       setAppointments(responsePending.data)
+
     }
 
     getAppointments();
@@ -113,7 +114,7 @@ const AppointmentPendingCard = ({ navigation }) => {
                   key={appointment.id}>
 
                   <IconCard>
-                    <Image source={logo} resizeMode="center" />
+                    <Image source={{uri: appointment.user.path_avatar}} resizeMode="center" />
                   </IconCard>
 
                   <Data>

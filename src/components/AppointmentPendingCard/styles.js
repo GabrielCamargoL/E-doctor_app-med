@@ -55,6 +55,7 @@ export const SpecialtyLabel = styled.Text`
 export const Image = styled.Image`
   width: 100%;
   height: 100%;
+  border-radius: 200px;
 `;
 
 export const ButtonsView = styled.View`

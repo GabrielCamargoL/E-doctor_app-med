@@ -19,7 +19,7 @@ import {
 import Avatar from '../../assets/Avatar.png';
 
 const HeaderCheckout = ({
-  client
+  image
 }) => {
   const [isFavorite, setIsFavorite] = useState(false);
   const [listFavorites, setListFavorites] = useState([]);
@@ -38,7 +38,7 @@ const HeaderCheckout = ({
       
 
       <ViewLogo elevation={8}>
-        <HeaderLogo source={Avatar} />
+        <HeaderLogo source={image ? ({uri: image}) : (Avatar)} />
       </ViewLogo>
     </>
   );
