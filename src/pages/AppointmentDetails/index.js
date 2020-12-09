@@ -213,7 +213,7 @@ export default function DetailsDoctor({ navigation, route }) {
           <>
             <Container>
               <ScrollView>
-                <HeaderCheckout />
+                <HeaderCheckout image={appointment.user.path_avatar}/>
 
                 <Row style={{ justifyContent: 'space-between' }}>
                   <Col>

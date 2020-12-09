@@ -23,7 +23,14 @@ export default function navinext() {
 
       // (required) Called when a remote is received or opened, or local notification is opened
     },
+    onRegistrationError: function(err) {
+      console.error(err.message, err);
+    },
   });
+
+  PushNotification.getChannels ( function ( channels )  { 
+    console.log ( 'getchannels nos dá' ,  channels ) ; 
+  } ) ;
 
   return (
     <NavigationContainer>
