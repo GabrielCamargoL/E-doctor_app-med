@@ -9,6 +9,7 @@ import {
   Text
 } from 'react-native';
 
+import messaging from '@react-native-firebase/messaging';
 
 import {
   Container,
@@ -24,6 +25,7 @@ import {
   InputLabel,
   InputContainer,
 } from './styles';
+
 
 import api from '../../services/api';
 
@@ -56,15 +58,14 @@ export default function Login({ navigation }) {
         email,
         password,
       });
-      console.log(response.data);
+      console.log(response.data.doctor.fcmToken);
       if (response.data) {
         await AsyncStorage.setItem('token', response.data.token.token);
         await AsyncStorage.setItem('auth_id', response.data.doctor.id.toString());
         await AsyncStorage.setItem('username', response.data.doctor.username);
         await AsyncStorage.setItem('surname', response.data.doctor.surname);
         await AsyncStorage.setItem('email', response.data.doctor.email);
-
-        setTimeout(() => navigation.replace('Home'), 3000);
+        getTokenFirebase(response.data.doctor.fcmToken, response.data.doctor.id);
       } else {
         setLoad(false);
         navigation.navigate('ErrorLogin');
@@ -75,6 +76,23 @@ export default function Login({ navigation }) {
       navigation.navigate('ErrorLogin');
     }
   }
+
+  const getTokenFirebase = async (fcmToken, auth_id) => {
+    let fcmTokenStorage = await messaging().getToken();
+    console.log(auth_id)
+    if (fcmTokenStorage == fcmToken)
+      return setTimeout(() => navigation.replace('Home'), 3000);
+
+    try {
+      await api.put(`/doctorAuth/fcmToken/${auth_id}`, { fcmToken: fcmTokenStorage });
+      await AsyncStorage.setItem('fcmToken', fcmTokenStorage);
+      return setTimeout(() => navigation.replace('Home'), 3000);
+    } catch (error) {
+      console.log("PUT fcmToken: " + error);
+      setLoad(false);
+      navigation.navigate('ErrorLogin');
+    }
+  };
 
   return (
     <>

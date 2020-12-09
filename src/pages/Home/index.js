@@ -1,6 +1,9 @@
 import React, { useState, useEffect } from 'react';
 import { View, StyleSheet, StatusBar, AsyncStorage, ScrollView, TouchableOpacity, RefreshControl, BackHandler, Alert } from 'react-native';
 
+import PushNotification from 'react-native-push-notification';
+import messaging from '@react-native-firebase/messaging';
+
 import { useIsDrawerOpen } from '@react-navigation/drawer';
 
 import moment from 'moment';
@@ -53,8 +56,20 @@ export default function Home({ navigation }) {
   useEffect(() => {
     setRefreshing(true);
     getAppointments()
+    requestUserPermission()
     setRefreshing(false);
   }, [reload]);
+
+  async function requestUserPermission() {
+    const authStatus = await messaging().requestPermission();
+    const enabled =
+      authStatus === messaging.AuthorizationStatus.AUTHORIZED ||
+      authStatus === messaging.AuthorizationStatus.PROVISIONAL;
+
+    if (enabled) {
+      console.log('Authorization status:', authStatus);
+    }
+  }
 
   async function getAppointments() {
     const doctor_id = await AsyncStorage.getItem('auth_id');
